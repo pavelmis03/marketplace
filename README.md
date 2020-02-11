@@ -1,7 +1,7 @@
-# Проект "Simple votings"
+# Проект "DEFINE ME"
 
 ### Цель
-Предоставить пользователю сервис, на котором можно быстро создать голосование и собрать мнения пользователей касательно какого-либо вопроса
+DEFINE ME
 
 ### Технологический стек:
 - python 3.6
@@ -27,9 +27,7 @@ python manage.py migrate
 ```
 8. Создать суперпользователя
 ```bash
-$ python manage.py createsuperuser
-Username (leave blank to use 'prom'): vasya
-Email: 1@abc.net
+$ python manage.py createsuperuser --username vasya --email 1@abc.net
 Password: promprog
 Password (repeat): promprog
 ```
