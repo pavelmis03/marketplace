@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1>Сброс пароля</h1>
+            <hr>
+            {% if validlink %}
+                <p>Введите (и подтвердите) ваш новый пароль.</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>{{ form.new_password1.errors }}
+                                <label for="id_new_password1">Новый пароль:</label></td>
+                            <td>{{ form.new_password1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.new_password2.errors }}
+                                <label for="id_new_password2">Подтверждение пароля:</label></td>
+                            <td>{{ form.new_password2 }}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Изменить пароль" /></td>
+                        </tr>
+                    </table>
+                </form>
+            {% else %}
+                <h1>Ошибка сброса пароля</h1>
+                <p>Ссылка для сброса пароля недействительна, возможно, потому что она уже использовалась. Пожалуйста, запросите новый сброс пароля.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

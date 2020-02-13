@@ -1,0 +1,3 @@
+Кто-то запросил сброс пароля для электронной почты {{ email }}.
+Если это вы, перейдите по ссылке ниже:
+{{ protocol }}://{{ domain }}{% url 'user.password.reset.confirm' uidb64=uid token=token %}

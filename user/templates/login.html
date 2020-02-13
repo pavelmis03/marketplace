@@ -15,6 +15,8 @@
                 {% bootstrap_form form %}
                 {% buttons %}
                     <button type="submit" class="btn btn-primary float-right btn-block">Войти</button>
+                    <a class="btn btn-outline-primary text-center float-right btn-block" href="{% url 'user.password.reset' %}" role="button">Забыли пароль?</a>
+
                     <input type="hidden" name="next" value="{{ next }}" />
                 {% endbuttons %}
             </form>
