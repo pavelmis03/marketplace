@@ -25,7 +25,7 @@ SECRET_KEY = '(^bvf47lc+06+v+rul45ch(u!a1(&*p16a$vk#okso%thze6$z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'main',
-    'market',
-    'user',
+    # 'shop',
+    # 'main',
+    # 'market',
+    # 'user',
+    # 'cart',
+    # 'orders',
 ]
 
 MIDDLEWARE = [
@@ -133,11 +136,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # LOGIN_REDIRECT_URL = '/'
 # LOGOUT_REDIRECT_URL = '/'
 
+
 # EMAIL - для отправки сообщений со сбросом пароля
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FILE_PATH = 'emails/email-messages/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'shp.ms104.dev.marketplace.bot@gmail.com'
 SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
 EMAIL_HOST_PASSWORD = "promprog"
+
+
+# DJANGO-SHOP
+SHOP_DEFAULT_CURRENCY = 'RUB'  # Валюта
+SHOP_MONEY_FORMAT = '{amount} {currency}'  # Формат отображения данных
+DECIMAL_PLACES = 0  # Чтобы было без копеек
+
+CART_SESSION_ID = 'cart'

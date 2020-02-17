@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from main.views import get_base_context
 
 
-class DetailViewContextDefined():
+class DetailViewContextDefined:
     pagename = 'unnamed'
 
     def get_context_data(self, **kwargs):
