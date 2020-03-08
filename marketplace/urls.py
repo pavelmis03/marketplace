@@ -24,9 +24,9 @@ from marketplace import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', main_views.index_page, name='index'),
-    path('', include(apps.get_app_config('oscar').urls[0])),
+    path('', include(apps.get_app_config('oscar').urls[0]), name='index'),
 
-    # path('time/', main_views.time_page, name='time'),
+     path('ya_safety/', main_views.time_page, name='ya_safety'),
 
     # path('user/', include('user.urls')),
 
