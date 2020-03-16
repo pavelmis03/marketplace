@@ -42,6 +42,10 @@ def index_page(request):
     return render(request, 'pages/index.html', context)
 
 
+def ya_maps(request):
+    context = get_base_context(request, "Карты")
+    return render(request, 'pages/ya_maps.html', context)
+
 def time_page(request):
     context = get_base_context(request, "Проверка сайта")
     context['time'] = timezone.now().time()

@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include(apps.get_app_config('oscar').urls[0]), name='index'),
 
      path('ya_safety/', main_views.time_page, name='ya_safety'),
+     path('ya_maps/', main_views.ya_maps, name='ya_maps'),
 
     # path('user/', include('user.urls')),
 
