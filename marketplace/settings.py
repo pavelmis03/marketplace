@@ -70,10 +70,8 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
 
-    # customized_apps
+    # customized apps
     'apps.catalogue',
-    # 'apps.catalogue.reviews',
-    # 'apps.dashboard.catalogue',
 
     # 3rd-party apps that oscar depends on
     'widget_tweaks',

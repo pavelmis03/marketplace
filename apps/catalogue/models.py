@@ -13,7 +13,6 @@ class Market(models.Model):
     image = models.ImageField(_('Image'), upload_to='markets', blank=True, null=True, max_length=255)
 
     class Meta:
-        abstract = True
         app_label = 'catalogue'
         ordering = ['name']
         verbose_name = "Магазин"
