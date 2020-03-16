@@ -17,15 +17,19 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from django.apps import apps
 from main import views as main_views
 from marketplace import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_views.index_page, name='index'),
-    path('time/', main_views.time_page, name='time'),
+    # path('', main_views.index_page, name='index'),
+    path('', include(apps.get_app_config('oscar').urls[0]), name='index'),
 
-    path('user/', include('user.urls')),
+     path('ya_safety/', main_views.time_page, name='ya_safety'),
+     path('ya_maps/', main_views.ya_maps, name='ya_maps'),
 
-    path('market/', include('market.urls')),
+    # path('user/', include('user.urls')),
+
+    # path('market/', include('market.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

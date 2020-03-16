@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+    <h1>Тест Яндекс карт</h1>
+    <hr>
+
+
+    <script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+        var myMap = new ymaps.Map("map", {
+                center: [55.911714, 37.718920],
+                zoom: 16
+            }, {
+                searchControlProvider: 'yandex#search'
+            }),
+            myGeoObject = new ymaps.GeoObject({
+                // Описание геометрии.
+                geometry: {
+                    type: "Point",
+                    coordinates: [55.912143, 37.717752]
+                },
+                // Свойства.
+                properties: {
+                    // Контент метки.
+                    iconContent: 'Художественная школа'
+                }
+            }, {
+                preset: 'islands#blackStretchyIcon'
+            }),
+            myPieChart = new ymaps.Placemark([55.911068, 37.720007], {
+                iconCaption: "Качалка"
+            }, {
+            });
+
+        myMap.geoObjects
+            .add(myGeoObject)
+            .add(myPieChart)
+            .add(new ymaps.Placemark([55.911941, 37.722846], {
+                iconCaption: 'Водоканальчик'
+            }, {
+                preset: 'islands#governmentCircleIcon',
+                iconColor: '#735184'
+            }))
+            .add(new ymaps.Placemark([55.911396, 37.723807], {
+                iconCaption: 'Ну детский сад, серьёзно'}, {
+                preset: 'islands#circleDotIcon',
+                iconColor: '#3caa3c'
+            }))
+            .add(new ymaps.Placemark([55.913369, 37.719873], {
+                iconCaption: '5+ я бы сказал'
+            }, {
+                preset: 'islands#greenDotIconWithCaption'
+            }))
+            .add(new ymaps.Placemark([55.911714, 37.718920], {
+                iconCaption: 'Тут промпрог'
+            }, {
+                preset: 'islands#redDotIconWithCaption'
+            }));
+    }
+    </script>
+    <h2>А вот тут промпрог</h2>
+    <div id="map" style="width: 600px; height: 400px"></div>
+    <h2>Многоугольник</h2>
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4755e3b582968502e1d0f2cc7cca201794397e7a07a3d592d996077beefe9140&amp;width=700&amp;height=900&amp;lang=ru_RU&amp;scroll=true"></script>
+{% endblock %}
