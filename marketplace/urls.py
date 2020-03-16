@@ -1,4 +1,4 @@
-"""simple_votings URL Configuration
+"""marketplace URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -13,27 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from main import views
-from django.contrib.auth import views as auth_views
-
-from main.views import get_menu_context
+from main import views as main_views
+from marketplace import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_page, name='index'),
-    path('time/', views.time_page, name='time'),
-    path(
-        'login/',
-        auth_views.LoginView.as_view(
-            extra_context={
-                'menu': get_menu_context(),
-                'pagename': 'Авторизация'
-            }
-        ),
-        name='login'
-    ),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout')
-]
+    path('', main_views.index_page, name='index'),
+    path('time/', main_views.time_page, name='time'),
+
+    path('user/', include('user.urls')),
+
+    path('market/', include('market.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
