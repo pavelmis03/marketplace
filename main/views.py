@@ -1,6 +1,7 @@
 import requests
 from django.shortcuts import render
 from django.utils import timezone
+import docs as docs_html
 
 bad_sites = [
     {'url': 'https://ydx-malware-driveby-shavar.cepera.ru'},
@@ -81,3 +82,7 @@ def time_page(request):
             context['site_safety'] = 3
             context['description'] = str(pr)
     return render(request, 'pages/ya_safety.html', context)
+
+
+def view_docs(request):
+    return render(request, 'pages/docs/overview.html', {})
