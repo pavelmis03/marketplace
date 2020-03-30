@@ -85,4 +85,4 @@ def time_page(request):
 
 
 def view_docs(request):
-    return render(request, 'pages/docs/overview.html', {})
+    return render(request, 'Вот тут вот надо сослаться на файл docs/build/html/index.html, вот только как?)', {})
