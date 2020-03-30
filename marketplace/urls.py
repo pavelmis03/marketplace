@@ -17,6 +17,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from apps.catalogue.urls import urlpatterns as catalog_urls
 from django.apps import apps
 from main import views as main_views
 from marketplace import settings
@@ -25,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', main_views.index_page, name='index'),
     path('', include(apps.get_app_config('oscar').urls[0])),
+    path('', include(catalog_urls)),
 
     # path('time/', main_views.time_page, name='time'),
 
