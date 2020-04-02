@@ -85,4 +85,16 @@ def time_page(request):
 
 
 def view_docs(request):
-    return render(request, 'Вот тут вот надо сослаться на файл docs/build/html/index.html, вот только как?)', {})
+    return render(request, 'build/html/index.html', {})
+
+def view_docs_overview(request):
+    return render(request, 'build/html/overview.html', {})
+
+def view_docs_code(request):
+    return render(request, 'build/html/code.html', {})
+
+def view_docs_genindex(request):
+    return render(request, 'build/html/genindex.html', {})
+
+def view_docs_search(request):
+    return render(request, 'build/html/search.html', {})
