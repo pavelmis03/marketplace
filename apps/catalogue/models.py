@@ -3,12 +3,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.models.fields import AutoSlugField
+from oscar.models.fields.slugfield import SlugField
 
 
 class Market(models.Model):
     name = models.CharField(_('Name'), max_length=255, db_index=True)
     # slug = SlugField(_('Slug'), max_length=255, db_index=True)
-    slug = AutoSlugField(_('Slug'), max_length=255, db_index=True, unique=True, populate_from='name')
+    slug = SlugField(_('Slug'), max_length=255, db_index=True, unique=True)
     description = models.TextField(_('Description'), blank=True)
     image = models.ImageField(_('Image'), upload_to='markets', blank=True, null=True, max_length=255)
 

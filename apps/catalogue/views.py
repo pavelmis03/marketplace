@@ -107,5 +107,14 @@ from apps.catalogue.models import Market
 #             'oscar/%s/detail.html' % self.template_folder]
 
 def market_view(request, slug):
-    print(slug)
-    return render(request, 'market.html')
+    context = {
+        'found': False,
+    }
+    markets = Market.objects.filter(slug=slug)
+
+    if markets:
+        context['found'] = True
+        context['market'] = markets[0]
+    print(slug, markets, markets[0].image, markets[0].image.url)
+
+    return render(request, 'market.html', context)
