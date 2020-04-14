@@ -1,6 +1,11 @@
+import json
+
 import requests
 from django.shortcuts import render
 from django.utils import timezone
+
+from main.forms import *
+from main.models import ShopCoordinates
 
 bad_sites = [
     {'url': 'https://ydx-malware-driveby-shavar.cepera.ru'},
@@ -44,7 +49,25 @@ def index_page(request):
 
 def ya_maps(request):
     context = get_base_context(request, "Карты")
+
+    if request.method == "POST":
+        form = NewShopAddressForm(request.POST)
+        if form.is_valid():
+            x_coord = form.cleaned_data["x_coord"]
+            y_coord = form.cleaned_data["y_coord"]
+            shop = ShopCoordinates()
+            shop.x_coord = float(x_coord)
+            shop.y_coord = float(y_coord)
+            shop.address = "ыыы"
+            shop.save()
+    else:
+        form = NewShopAddressForm()
+
+    addresses = [[x.x_coord, x.y_coord] for x in ShopCoordinates.objects.all()]
+    context["Jsonchik"] = addresses
+
     return render(request, 'pages/ya_maps.html', context)
+
 
 def time_page(request):
     context = get_base_context(request, "Проверка сайта")
@@ -65,10 +88,13 @@ def time_page(request):
                                 "POTENTIALLY_HARMFUL_APPLICATION"],
                 "platformTypes": ["ALL_PLATFORMS"],
                 "threatEntryTypes": ["URL"],
-                "threatEntries": [ {'url': inp} ]
+                "threatEntries": [{'url': inp}]
             }
         }
-        pr = requests.post(url='https://sba.yandex.net/v4/threatMatches:find?key=' + key, json=data)
+        pr = requests.post(
+            url='https://sba.yandex.net/v4/threatMatches:find?key=' +
+            key,
+            json=data)
         print(pr, pr.text, 1)
         try:
             json = pr.json()
@@ -77,7 +103,7 @@ def time_page(request):
             else:  # The site is NOT secure
                 context['site_safety'] = 2
                 context['description'] = str(json['matches'][0]['threatType'])
-        except:
+        except BaseException:
             context['site_safety'] = 3
             context['description'] = str(pr)
     return render(request, 'pages/ya_safety.html', context)

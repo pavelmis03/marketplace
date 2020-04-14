@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class ShopCoordinates(models.Model):
+    x_coord = models.FloatField()
+    y_coord = models.FloatField()
+    address = models.CharField(max_length=240)

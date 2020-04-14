@@ -2,66 +2,146 @@
 
 
 {% block content %}
-    <h1>Тест Яндекс карт</h1>
+    <h1>На этой странице вы можете добавить адреса ваших магазинов</h1>
     <hr>
 
+    <form method="POST" name="shop_coordinates">
+        {% csrf_token %}
+        <div>Укажите координаты вашего магазина</div>
+        <input required="false" type="text" id="address" name="address" class="input checking-page__input" placeholder="Address" value="">
+        <input required="true" type="text" id="x_coord" name="x_coord" class="input checking-page__input" placeholder="X координата" value="">
+        <input required="true" type="text" id="y_coord" name="y_coord" class="input checking-page__input" placeholder="Y координата" value="">
+        <input type="submit">
+    </form>
 
-    <script type="text/javascript">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=a4f87bfa-49ea-423d-8727-02a713d3c955" type="text/javascript"></script>
+
+    <script>
     ymaps.ready(init);
-    function init() {
-        var myMap = new ymaps.Map("map", {
-                center: [55.911714, 37.718920],
-                zoom: 16
-            }, {
-                searchControlProvider: 'yandex#search'
-            }),
-            myGeoObject = new ymaps.GeoObject({
-                // Описание геометрии.
-                geometry: {
-                    type: "Point",
-                    coordinates: [55.912143, 37.717752]
-                },
-                // Свойства.
-                properties: {
-                    // Контент метки.
-                    iconContent: 'Художественная школа'
-                }
-            }, {
-                preset: 'islands#blackStretchyIcon'
-            }),
-            myPieChart = new ymaps.Placemark([55.911068, 37.720007], {
-                iconCaption: "Качалка"
-            }, {
-            });
 
-        myMap.geoObjects
-            .add(myGeoObject)
-            .add(myPieChart)
-            .add(new ymaps.Placemark([55.911941, 37.722846], {
-                iconCaption: 'Водоканальчик'
-            }, {
-                preset: 'islands#governmentCircleIcon',
-                iconColor: '#735184'
-            }))
-            .add(new ymaps.Placemark([55.911396, 37.723807], {
-                iconCaption: 'Ну детский сад, серьёзно'}, {
-                preset: 'islands#circleDotIcon',
-                iconColor: '#3caa3c'
-            }))
-            .add(new ymaps.Placemark([55.913369, 37.719873], {
-                iconCaption: '5+ я бы сказал'
-            }, {
-                preset: 'islands#greenDotIconWithCaption'
-            }))
-            .add(new ymaps.Placemark([55.911714, 37.718920], {
-                iconCaption: 'Тут промпрог'
-            }, {
-                preset: 'islands#redDotIconWithCaption'
-            }));
+function init() {
+    var myPlacemark,
+        myMap = new ymaps.Map('map', {
+            center: [55.753994, 37.622093],
+            zoom: 9
+        }, {
+            searchControlProvider: 'yandex#search'
+        }),
+
+
+
+    BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+            '<div style="margin: 10px;">' +
+                '<b>{{properties}}</b><br>' +
+                '<i id="count"></i> ' +
+                '<button id="counter-button"> Удалить торговую точку </button>' +
+            '</div>', {
+
+            // Переопределяем функцию build, чтобы при создании макета начинать
+            // слушать событие click на кнопке-счетчике.
+            build: function () {
+                // Сначала вызываем метод build родительского класса.
+                BalloonContentLayout.superclass.build.call(this);
+                // А затем выполняем дополнительные действия.
+                $('#counter-button').bind('click', this.onCounterClick);
+            },
+
+            // Аналогично переопределяем функцию clear, чтобы снять
+            // прослушивание клика при удалении макета с карты.
+            clear: function () {
+                // Выполняем действия в обратном порядке - сначала снимаем слушателя,
+                // а потом вызываем метод clear родительского класса.
+                $('#counter-button').unbind('click', this.onCounterClick);
+                BalloonContentLayout.superclass.clear.call(this);
+            },
+
+            onCounterClick: function () {
+                alert('ААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА');
+            }
+        });
+
+
+    // Слушаем клик на карте.
+    myMap.events.add('click', function (e) {
+        var coords = e.get('coords');
+
+        // Если метка уже создана – просто передвигаем ее.
+        if (myPlacemark) {
+            myPlacemark.geometry.setCoordinates(coords);
+        }
+        // Если нет – создаем.
+        else {
+            myPlacemark = createPlacemark(coords);
+            myMap.geoObjects.add(myPlacemark);
+            // Слушаем событие окончания перетаскивания на метке.
+            myPlacemark.events.add('dragend', function () {
+                getAddress(myPlacemark.geometry.getCoordinates());
+            });
+        }
+        getAddress(coords);
+        x_coord["value"] = myPlacemark.geometry.getCoordinates()[0]
+        y_coord["value"] = myPlacemark.geometry.getCoordinates()[1]
+    });
+
+    spawnOldPlacemarks(myMap);
+
+    function spawnOldPlacemarks(map) {
+            var arr = {{ Jsonchik }}
+            arr.forEach(function(item, i, arr) {
+                map.geoObjects.add(new ymaps.Placemark(item, {
+                    iconCaption: 'Тут ' + i + ' магазин',
+                    name: 'Удаление торговой точки '
+                }, {
+                    preset: 'islands#darkBlueIcon',
+                    balloonContentLayout: BalloonContentLayout,
+                    balloonPanelMaxMapArea: 0,
+                    draggable: false
+                }));
+            });
     }
+
+    // Создание метки.
+    function createPlacemark(coords) {
+        return new ymaps.Placemark(coords, {
+            iconCaption: 'поиск...',
+            iconCaptionMaxWidth: 2000
+        }, {
+            iconCaptionMaxWidth: 2000,
+            preset: 'islands#redDotIcon',
+            draggable: false,
+            hideIconOnBalloonOpen: false,
+            hasBalloon: true
+        });
+    }
+
+    // Определяем адрес по координатам (обратное геокодирование).
+    function getAddress(coords) {
+        myPlacemark.properties.set('iconCaption', 'поиск...');
+        myPlacemark.properties.set('iconCaptionMaxWidth', '2000');
+        ymaps.geocode(coords).then(
+        function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+
+            address["value"] = firstGeoObject.getAddressLine();
+
+            myPlacemark.properties
+                .set({
+                    // Формируем строку с данными об объекте.
+                    iconCaption: [
+                        // Название населенного пункта или вышестоящее административно-территориальное образование.
+                        firstGeoObject.getLocalities().length ? firstGeoObject.getAddressLine() : firstGeoObject.getAddressLine(),
+                        // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                    ].filter(Boolean).join(', '),
+                    // В качестве контента балуна задаем строку с адресом объекта.
+                    balloonContent: firstGeoObject.getAddressLine()
+                });
+        });
+
+
+    }
+}
+
     </script>
-    <h2>А вот тут промпрог</h2>
     <div id="map" style="width: 600px; height: 400px"></div>
-    <h2>Многоугольник</h2>
-    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4755e3b582968502e1d0f2cc7cca201794397e7a07a3d592d996077beefe9140&amp;width=700&amp;height=900&amp;lang=ru_RU&amp;scroll=true"></script>
 {% endblock %}

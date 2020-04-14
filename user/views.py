@@ -28,25 +28,29 @@ def logout_page(request):
     return redirect('index')
 
 
-class PasswordResetView(auth_views.PasswordResetView, DetailViewContextDefined):
+class PasswordResetView(auth_views.PasswordResetView,
+                        DetailViewContextDefined):
     pagename = 'Сброс пароля'
     template_name = os.path.join('password', 'reset-form.html')
     email_template_name = os.path.join('password', 'reset-email.html')
     success_url = reverse_lazy('user.password.reset.done')
 
 
-class PasswordResetCompleteView(auth_views.PasswordResetCompleteView, DetailViewContextDefined):
+class PasswordResetCompleteView(
+        auth_views.PasswordResetCompleteView, DetailViewContextDefined):
     pagename = 'Сброс пароля'
     template_name = os.path.join('password', 'reset-complete.html')
 
 
-class PasswordResetConfirmView(auth_views.PasswordResetConfirmView, DetailViewContextDefined):
+class PasswordResetConfirmView(
+        auth_views.PasswordResetConfirmView, DetailViewContextDefined):
     pagename = 'Сброс пароля'
     template_name = os.path.join('password', 'reset-confirm.html')
     success_url = reverse_lazy('user.password.reset.complete')
 
 
-class PasswordChangeView(auth_views.PasswordChangeView, DetailViewContextDefined):
+class PasswordChangeView(auth_views.PasswordChangeView,
+                         DetailViewContextDefined):
     pagename = 'Изменение пароля'
     template_name = os.path.join('password', 'change-form.html')
     success_url = 'index'
