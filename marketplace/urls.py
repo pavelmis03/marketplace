@@ -13,18 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.apps import apps
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from django.apps import apps
-from main import views as main_views
 from marketplace import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', main_views.index_page, name='index'),
     path('', include(apps.get_app_config('oscar').urls[0])),
+
+    # API & bot
+    path('', include('botapp.urls')),
 
     # path('time/', main_views.time_page, name='time'),
 
