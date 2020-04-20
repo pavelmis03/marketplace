@@ -9,9 +9,10 @@
         {% csrf_token %}
         <div>Укажите координаты вашего магазина</div>
         <input required="false" type="text" id="address" name="address" class="input checking-page__input" placeholder="Address" value="">
-        <input required="true" type="text" id="x_coord" name="x_coord" class="input checking-page__input" placeholder="X координата" value="">
-        <input required="true" type="text" id="y_coord" name="y_coord" class="input checking-page__input" placeholder="Y координата" value="">
-        <input type="submit">
+        <input required="true" type="hidden" type="text" id="x_coord" name="x_coord" class="input checking-page__input" placeholder="X координата" value=""></input>
+        <input required="true" type="hidden" type="text" id="y_coord" name="y_coord" class="input checking-page__input" placeholder="Y координата" value=""></input>
+        <!---<input type="submit" name="delAll" value="Удалить все магазины"> --->
+        <input type="submit" name="addNew" value="Добавить магазин">
     </form>
 
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=a4f87bfa-49ea-423d-8727-02a713d3c955" type="text/javascript"></script>
@@ -32,7 +33,6 @@ function init() {
 
     BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
             '<div style="margin: 10px;">' +
-                '<b>{{properties}}</b><br>' +
                 '<i id="count"></i> ' +
                 '<button id="counter-button"> Удалить торговую точку </button>' +
             '</div>', {
@@ -56,7 +56,7 @@ function init() {
             },
 
             onCounterClick: function () {
-                alert('ААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА');
+                alert('Your store has been deleted');
             }
         });
 

@@ -55,10 +55,14 @@ def ya_maps(request):
         if form.is_valid():
             x_coord = form.cleaned_data["x_coord"]
             y_coord = form.cleaned_data["y_coord"]
+            address = form.cleaned_data["address"]
+
             shop = ShopCoordinates()
             shop.x_coord = float(x_coord)
             shop.y_coord = float(y_coord)
-            shop.address = "ыыы"
+            shop.address = address
+
+
             shop.save()
     else:
         form = NewShopAddressForm()
