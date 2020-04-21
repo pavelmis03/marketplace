@@ -11,13 +11,25 @@
         <input required="false" type="text" id="address" name="address" class="input checking-page__input" placeholder="Address" value="">
         <input required="true" type="hidden" type="text" id="x_coord" name="x_coord" class="input checking-page__input" placeholder="X координата" value=""></input>
         <input required="true" type="hidden" type="text" id="y_coord" name="y_coord" class="input checking-page__input" placeholder="Y координата" value=""></input>
-        <!---<input type="submit" name="delAll" value="Удалить все магазины"> --->
         <input type="submit" name="addNew" value="Добавить магазин">
     </form>
+
+    <input type="button" id="delAll" name="delAll" value="Удалить все магазины">
 
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=a4f87bfa-49ea-423d-8727-02a713d3c955" type="text/javascript"></script>
 
     <script>
+
+    delAll.addEventListener("click", function() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", '/ya_maps/?deleteAll=true', true);
+        xhr.send();
+        xhr.addEventListener("readystatechange", function () {
+            if((xhr.readyState == 4) && (xhr.status == 200)) {
+                document.location.reload();
+            }
+        });
+    });
     ymaps.ready(init);
 
 function init() {
@@ -28,38 +40,42 @@ function init() {
         }, {
             searchControlProvider: 'yandex#search'
         }),
+            BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                '<div style="margin: 10px;">' +
+                    '<input type="hidden" name="x_data" value="x{{properties.xdata}}"></input> ' +
+                    '<input type="hidden" name="y_data" value="x{{properties.ydata}}"></input> ' +
+                    '<button id="counter-button"> Удалить торговую точку </button>' +
+                '</div>', {
 
+                // Переопределяем функцию build, чтобы при создании макета начинать
+                // слушать событие click на кнопке-счетчике.
+                build: function () {
+                    // Сначала вызываем метод build родительского класса.
+                    BalloonContentLayout.superclass.build.call(this);
+                    // А затем выполняем дополнительные действия.
+                    $('#counter-button').bind('click', this.onCounterClick);
+                },
 
+                // Аналогично переопределяем функцию clear, чтобы снять
+                // прослушивание клика при удалении макета с карты.
+                clear: function () {
+                    // Выполняем действия в обратном порядке - сначала снимаем слушателя,
+                    // а потом вызываем метод clear родительского класса.
+                    $('#counter-button').unbind('click', this.onCounterClick);
+                    BalloonContentLayout.superclass.clear.call(this);
+                },
 
-    BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-            '<div style="margin: 10px;">' +
-                '<i id="count"></i> ' +
-                '<button id="counter-button"> Удалить торговую точку </button>' +
-            '</div>', {
-
-            // Переопределяем функцию build, чтобы при создании макета начинать
-            // слушать событие click на кнопке-счетчике.
-            build: function () {
-                // Сначала вызываем метод build родительского класса.
-                BalloonContentLayout.superclass.build.call(this);
-                // А затем выполняем дополнительные действия.
-                $('#counter-button').bind('click', this.onCounterClick);
-            },
-
-            // Аналогично переопределяем функцию clear, чтобы снять
-            // прослушивание клика при удалении макета с карты.
-            clear: function () {
-                // Выполняем действия в обратном порядке - сначала снимаем слушателя,
-                // а потом вызываем метод clear родительского класса.
-                $('#counter-button').unbind('click', this.onCounterClick);
-                BalloonContentLayout.superclass.clear.call(this);
-            },
-
-            onCounterClick: function () {
-                alert('Your store has been deleted');
-            }
-        });
-
+                onCounterClick: function () {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("GET", '/ya_maps/?deletePlacemark=true&x_data=' + {{properties.x_data}} + '&y_data=' + {{properties.y_data}} + "", true);
+                    xhr.send();
+                    xhr.addEventListener("readystatechange", function () {
+                        if((xhr.readyState == 4) && (xhr.status == 200)) {
+                            document.location.reload();
+                        }
+                    });
+                }
+            });
 
     // Слушаем клик на карте.
     myMap.events.add('click', function (e) {
@@ -88,15 +104,20 @@ function init() {
     function spawnOldPlacemarks(map) {
             var arr = {{ Jsonchik }}
             arr.forEach(function(item, i, arr) {
-                map.geoObjects.add(new ymaps.Placemark(item, {
+
+                var oldPlacemark = new ymaps.Placemark(item, {
                     iconCaption: 'Тут ' + i + ' магазин',
-                    name: 'Удаление торговой точки '
+                    name: 'Удаление торговой точки ',
+                    xdata: item[0],
+                    ydata: item[1],
                 }, {
                     preset: 'islands#darkBlueIcon',
                     balloonContentLayout: BalloonContentLayout,
                     balloonPanelMaxMapArea: 0,
                     draggable: false
-                }));
+                });
+
+                map.geoObjects.add(oldPlacemark);
             });
     }
 

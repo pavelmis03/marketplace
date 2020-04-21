@@ -50,7 +50,17 @@ def index_page(request):
 def ya_maps(request):
     context = get_base_context(request, "Карты")
 
-    if request.method == "POST":
+    if request.method == "GET":
+        if request.GET.get("deleteAll") == "true":
+            ShopCoordinates.objects.all().delete()
+        if request.GET.get("deletePlacemark") == "true":
+            x = float(request.GET.get("x_data"))
+            y = float(request.GET.get("y_data"))
+            for shop in ShopCoordinates.objects.all():
+                if float(shop.x_coord) == x and float(shop.y_coord) == y:
+                    shop.delete()
+
+    elif request.method == "POST":
         form = NewShopAddressForm(request.POST)
         if form.is_valid():
             x_coord = form.cleaned_data["x_coord"]
@@ -61,7 +71,6 @@ def ya_maps(request):
             shop.x_coord = float(x_coord)
             shop.y_coord = float(y_coord)
             shop.address = address
-
 
             shop.save()
     else:
