@@ -1,31 +1,56 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="/">Django</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
+    <a class="navbar-brand" href="{% url 'index' %}">Мульти-МАРКЕТ</a>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
+
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                {% with totail_items=cart|length %}
-                    {% if totail_items > 0 %}
-                        <a class="nav-link" href="#">
-                            Корзина <span class="badge badge-secondary">{{ totail_items }}</span>
-                        </a>
-                        {% else %}
-                        <a class="nav-link" href="#">
-                            Корзина пуста
-                        </a>
-                    {% endif %}
-                {% endwith %}
-            </li>
+            {% block navbar %}
+                {% for item in navbar %}
+                    <li class="nav-item active">
+                        <a class="nav-link"
+                           href="
+                                {% if item.url_name %}
+                                    {% url item.url_name %}
+                                {% else %}
+                                    {% if item.url %}
+                                        {{ item.url }}
+                                    {% else %}
+                                        #
+                                    {% endif %}
+                                {% endif %}
+                                "
+                        >{{ item.name }}</a>
+                    </li>
+                {% endfor %}
+                <li class="nav-item">
+                    {% with totail_items=cart|length %}
+                        {% if totail_items > 0 %}
+                            <a class="nav-link" href="#">
+                                Корзина <span class="badge badge-secondary">{{ totail_items }}</span>
+                            </a>
+                            {% else %}
+                            <a class="nav-link" href="#">
+                                Корзина пуста
+                            </a>
+                        {% endif %}
+                    {% endwith %}
+                </li>
+            {% endblock %}
+
+        </ul>
+
+
+
+        <ul class="navbar-nav mr-1">
+            {% block right_navbar %}
+                <li class="nav-item">
+                    {% for item in right_navbar %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url item.url_name %}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </li>
+            {% endblock %}
         </ul>
     </div>
 </nav>

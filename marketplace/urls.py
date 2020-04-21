@@ -23,13 +23,13 @@ from marketplace import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', main_views.index_page, name='index'),
-    path('', include(apps.get_app_config('oscar').urls[0]), name='index'),
+    path('', main_views.index_page, name='index'),
+    path('oscar/', include(apps.get_app_config('oscar').urls[0]), name='oscar'),
 
-     path('ya_safety/', main_views.time_page, name='ya_safety'),
-     path('ya_maps/', main_views.ya_maps, name='ya_maps'),
+    path('ya_safety/', main_views.time_page, name='ya_safety'),
+    path('ya_maps/', main_views.ya_maps, name='ya_maps'),
 
-    # path('user/', include('user.urls')),
+    path('user/', include('user.urls')),
 
     # path('market/', include('market.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

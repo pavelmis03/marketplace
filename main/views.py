@@ -16,6 +16,7 @@ def get_base_context(request, pagename='UNTITLED'):
         'pagename': pagename,
         'navbar': [
             {'url_name': 'index', 'name': 'Главная'},
+            {'url': '/oscar/', 'name': 'OSCAR'},
         ],
         'right_navbar': [],
     }
