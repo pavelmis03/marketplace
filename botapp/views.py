@@ -1,11 +1,13 @@
+from django.contrib.sites.models import Site
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
-from oscar.apps.catalogue.models import Product, ProductClass
+from oscar.apps.basket.models import Basket
+from oscar.apps.catalogue.models import Product, ProductClass, Category
 from oscar.apps.order.models import Order, OrderNote
 from rest_framework import viewsets
 from rest_framework import permissions
 from botapp.serializers import UserSerializer, GroupSerializer, ProductSerializer, ProductClassSerializer, \
-    OrderSerializer, OrderNoteSerializer
+    OrderSerializer, OrderNoteSerializer, CategorySerializer, SiteSerializer, BasketSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,45 +20,48 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class ProductClassViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = ProductClass.objects.all()
     serializer_class = ProductClassSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderNoteViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = OrderNote.objects.all()
     serializer_class = OrderNoteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class SiteViewSet(viewsets.ModelViewSet):
+    queryset = Site.objects.all()
+    serializer_class = SiteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class BasketViewSet(viewsets.ModelViewSet):
+    queryset = Basket.objects.all()
+    serializer_class = BasketSerializer
     permission_classes = [permissions.IsAuthenticated]
