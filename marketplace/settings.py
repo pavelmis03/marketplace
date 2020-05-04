@@ -21,13 +21,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(^bvf47lc+06+v+rul45ch(u!a1(&*p16a$vk#okso%thze6$z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('MARKET_DEBUG', True))
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = '(^bvf47lc+06+v+rul45ch(u!a1(&*p16a$vk#okso%thze6$z'
+else:
+    ALLOWED_HOSTS = ['127.0.0.1', 'shp-marketplace.gq']
+    SECRET_KEY = os.environ.get("MARKET_SECRET_KEY", 'Dummy secret key')
 
 
 # Application definition
@@ -154,6 +157,25 @@ DATABASES = {
     }
 }
 
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ATOMIC_REQUESTS': True,
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get("MARKET_MYSQL_DATABASE", 'define me'),
+            'USER': os.environ.get("MARKET_MYSQL_USER", 'define me'),
+            'PASSWORD': os.environ.get("MARKET_MYSQL_PASSWORD", 'define me'),
+            'HOST': os.environ.get("MARKET_MYSQL_HOST", 'localhost'),
+            'PORT': os.environ.get("MARKET_MYSQL_PORT", '3306'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -195,13 +217,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATIC_ROOT = 'staticroot/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# LOGIN_URL = '/user/login/'
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'
 
 
 # EMAIL - для отправки сообщений со сбросом пароля

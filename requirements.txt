@@ -3,3 +3,9 @@ django-shop==1.1.1
 django-bootstrap4>=1.1.1
 django-oscar==2.0.0
 sorl-thumbnail==12.6.3
+
+# webserver
+daphne==2.5.0
+
+# Database
+mysqlclient==1.4.6
