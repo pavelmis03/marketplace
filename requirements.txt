@@ -5,7 +5,7 @@ django-oscar==2.0.0
 sorl-thumbnail==12.6.3
 
 # webserver
-daphne==2.5.0
+gunicorn==20.0.4
 
 # Database
 mysqlclient==1.4.6
