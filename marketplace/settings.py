@@ -221,3 +221,26 @@ SHOP_MONEY_FORMAT = '{amount} {currency}'  # Формат отображения
 DECIMAL_PLACES = 0  # Чтобы было без копеек
 
 CART_SESSION_ID = 'cart'
+
+OSCAR_SHOP_NAME = 'MarketPlace'
+#OSCAR_SHOP_TAGLINE = 'static/images/icons/slogan.png'
+#OSCAR_HOMEPAGE = '/reverse_lazy/'
+#OSCAR_RECENTLY_VIEWED_PRODUCTS = 20
+#OSCAR_RECENTLY_VIEWED_COOKIE_LIFETIME = 604800 #(1 неделя в секундах)
+#OSCAR_RECENTLY_VIEWED_COOKIE_NAME = 'oscar_history'
+OSCAR_DEFAULT_CURRENCY = 'RUB'
+#OSCAR_CURRENCY_FORMAT
+
+'''
+OSCAR_DASHBOARD_NAVIGATION += [
+    {
+        'label': ('Store manager'),
+        'children': [
+            {
+                'label': ('Stores'),
+                'url_name': 'your-reverse-url-lookup-name',
+            },
+         ]
+    },
+]
+'''
