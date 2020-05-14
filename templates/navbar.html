@@ -1,56 +1,87 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
-    <a class="navbar-brand" href="{% url 'index' %}">Мульти-МАРКЕТ</a>
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 980;">
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="#">Мульти-МАРКЕТ</a>
+        </div>
+        <!--        Блок поиска-->
+        <div class="uk-navbar-center">
+            <div class="box">
+                <div class="container-4">
+                    <input type="search" id="search" placeholder="Найдите, что искали..."/>
+                    <button class="icon"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <!--Конец блока поиска-->
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="">
+                        <img src="/static/img/cart.png" style="height: 45px" style="vertical-align: bottom" alt="">
+                        <span class="uk-badge" style="margin-top: -60%">0</span>
+                    </a>
+                </li>
+                <li>
+                    <hr class="uk-divider-vertical">
+                </li>
+                <li>
+                    <a class="uk-navbar-toggle" type="button" uk-toggle="target: #offcanvas-flip">
+                        <!--                            <span class="uk-margin-small-right">Меню пользователя</span> -->
+                        <img src="/static/img/user.png" alt="Avatar" class="avatar uk-margin-small-right card">
+                        <span uk-navbar-toggle-icon></span>
+                    </a>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                        <div class="uk-offcanvas-bar slider-right" style="text-align: center">
 
-        <ul class="navbar-nav mr-auto">
-            {% block navbar %}
-                {% for item in navbar %}
-                    <li class="nav-item active">
-                        <a class="nav-link"
-                           href="
-                                {% if item.url_name %}
-                                    {% url item.url_name %}
-                                {% else %}
-                                    {% if item.url %}
-                                        {{ item.url }}
-                                    {% else %}
-                                        #
-                                    {% endif %}
-                                {% endif %}
-                                "
-                        >{{ item.name }}</a>
-                    </li>
-                {% endfor %}
-                <li class="nav-item">
-                    {% with totail_items=cart|length %}
-                        {% if totail_items > 0 %}
-                            <a class="nav-link" href="#">
-                                Корзина <span class="badge badge-secondary">{{ totail_items }}</span>
-                            </a>
+                            <button class="uk-offcanvas-close" type="button" uk-close></button>
+                            {% if request.user.is_authenticated %}
+                            <h2>{{user}}</h2>
+
+
                             {% else %}
-                            <a class="nav-link" href="#">
-                                Корзина пуста
-                            </a>
-                        {% endif %}
-                    {% endwith %}
+                            <h2>Войдите</h2>
+                            <!--                                Форма авторизации-->
+                            <form style="text-align: left; margin: auto" method="post">
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <label class="uk-form-label">E-mail</label>
+                                        <input class="uk-input" placeholder="Логин..." style="width: 300px" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <label class="uk-form-label">Пароль</label>
+                                        <input class="uk-input" placeholder="Пароль..." style="width: 300px"
+                                               type="password">
+                                    </div>
+                                </div>
+
+                                <div class="uk-button uk-button-secondary" style="font-size: 11px">Забыли пароль?</div>
+                                <div class="uk-button uk-button-secondary"
+                                     style="background-color: #3058ff; color: white">Войти
+                                </div>
+                            </form>
+                            <!--                                    Конец-->
+                            <hr class="">
+                            <div class="uk-button uk-button-secondary"
+                                 style="background-color: #3058ff; color: white; width: 270px">Зарегистрироваться
+                            </div>
+
+
+                            {% endif %}
+                        </div>
+                    </div>
                 </li>
-            {% endblock %}
+            </ul>
+        </div>
+    </nav>
+</div>
+<form>
 
-        </ul>
+</form>
+<script src="https://use.fontawesome.com/850c66bc1f.js"></script>
 
-
-
-        <ul class="navbar-nav mr-1">
-            {% block right_navbar %}
-                <li class="nav-item">
-                    {% for item in right_navbar %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url item.url_name %}">{{ item.name }}</a>
-                        </li>
-                    {% endfor %}
-                </li>
-            {% endblock %}
-        </ul>
-    </div>
-</nav>
+<script src="/static/js/uikit.js"></script>
+<script src="/static/js/uikit.min.js"></script>

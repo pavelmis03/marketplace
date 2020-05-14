@@ -7,7 +7,13 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{{ pagename }} – Мульти-МАРКЕТ{% endblock %}</title>
-
+        <link rel="stylesheet" href="/static/css/uikit-rtl.css">
+        <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
+        <link rel="stylesheet" href="/static/css/uikit.css">
+        <link rel="stylesheet" href="/static/css/uikit.min.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/js/uikit-icons.js"></script>
+        <script src="/static/js/uikit-icons.min.js"></script>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="created" content="{% now 'jS M Y h:i' %}" />
         <meta name="description" content="{% block description %}{% endblock %}" />
@@ -44,7 +50,7 @@
 
                 {% block content %} {% endblock %}
 
-                {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
+            {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
 
         </main>
 

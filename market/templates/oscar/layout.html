@@ -8,9 +8,9 @@
         settings file. This will enable the on-the-fly less compiler.
     {% endcomment %}
     {% if use_less %}
-        <link rel="stylesheet/less" type="text/css" href="{% static "oscar/less/styles.less" %}" />
+        <link rel="stylesheet/less" type="text/css" href="{% static 'oscar/less/styles.less' %}" />
     {% else %}
-        <link rel="stylesheet" type="text/css" href="{% static "oscar/css/styles.css" %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'oscar/css/styles.css' %}" />
     {% endif %}
 {% endblock %}
 
@@ -22,7 +22,7 @@
     <header class="header container-fluid">
         <div class="page_inner">
             <div class="row">
-                {% include "oscar/partials/brand.html" %}
+<!--                {% include "oscar/partials/brand.html" %}-->
                 {# Mini-basket wrapped in a block so some templates can now display it #}
                 {% block mini_basket %}{% include "oscar/partials/mini_basket.html" %}{% endblock %}
             </div>
