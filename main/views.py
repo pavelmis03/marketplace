@@ -1,7 +1,6 @@
 import requests
 from django.shortcuts import render
 from django.utils import timezone
-import docs as docs_html
 
 bad_sites = [
     {'url': 'https://ydx-malware-driveby-shavar.cepera.ru'},
@@ -13,6 +12,15 @@ bad_sites = [
 
 
 def get_base_context(request, pagename='UNTITLED'):
+    """
+    Получение базового контекста
+
+    :param request: объект c деталями запроса. Используется для получения авторизованного пользователя
+    :type request: :class:`django.http.HttpRequest`
+    :param pagename: название страницы, по умолчанию его значение 'UNTITLED'
+    :return: словарь с предустановленными значениями
+    :rtype: :class:`dict`
+    """
     context = {
         'pagename': pagename,
         'navbar': [
@@ -39,15 +47,38 @@ def get_base_context(request, pagename='UNTITLED'):
 
 
 def index_page(request):
+    """
+    Главная страница
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    :rtype: :class:`django.http.HttpResponse`
+    """
     context = get_base_context(request, "Главная")
     return render(request, 'pages/index.html', context)
 
 
 def ya_maps(request):
+    """
+    Страница Яндекс-Карты
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    :rtype: :class:`django.http.HttpResponse`
+    """
     context = get_base_context(request, "Карты")
     return render(request, 'pages/ya_maps.html', context)
 
 def time_page(request):
+    """
+    Страница 'Дата и время'
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: перенаправление на главную страницу в случае POST-запроса
+    """
     context = get_base_context(request, "Проверка сайта")
     context['time'] = timezone.now().time()
     context['site_safety'] = 0
@@ -82,19 +113,3 @@ def time_page(request):
             context['site_safety'] = 3
             context['description'] = str(pr)
     return render(request, 'pages/ya_safety.html', context)
-
-
-def view_docs(request):
-    return render(request, 'build/html/index.html', {})
-
-def view_docs_overview(request):
-    return render(request, 'build/html/overview.html', {})
-
-def view_docs_code(request):
-    return render(request, 'build/html/code.html', {})
-
-def view_docs_genindex(request):
-    return render(request, 'build/html/genindex.html', {})
-
-def view_docs_search(request):
-    return render(request, 'build/html/search.html', {})
