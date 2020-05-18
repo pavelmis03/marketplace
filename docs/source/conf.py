@@ -13,6 +13,8 @@ import sphinx_rtd_theme
 #
 import os
 import django
+import sys
+sys.path.append(os.path.abspath('../../'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'marketplace.settings'
 django.setup()
 
