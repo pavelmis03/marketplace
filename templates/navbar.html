@@ -1,17 +1,10 @@
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-    <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 980;">
+    <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 9999980;">
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="#">Мульти-МАРКЕТ</a>
         </div>
         <!--        Блок поиска-->
-        <div class="uk-navbar-center">
-            <div class="box">
-                <div class="container-4">
-                    <input type="search" id="search" placeholder="Найдите, что искали..."/>
-                    <button class="icon"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </div>
+        {% include "oscar/partials/search.html" %}
         <!--Конец блока поиска-->
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
@@ -37,31 +30,34 @@
                             <button class="uk-offcanvas-close" type="button" uk-close></button>
                             {% if request.user.is_authenticated %}
                             <h2>{{user}}</h2>
-
+                            <div class="uk-button uk-button-secondary"
+                                 style="background-color: #3058ff; color: white; width: 270px"><a href="/oscar/accounts/logout">Выйти
+                            </a>
+                            </div>
 
                             {% else %}
                             <h2>Войдите</h2>
                             <!--                                Форма авторизации-->
-                            <form style="text-align: left; margin: auto" method="post">
+                            <form id="login_form" action="/oscar/accounts/login/" style="text-align: left; margin: auto" method="post">
+                                {% csrf_token %}
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label class="uk-form-label">E-mail</label>
-                                        <input class="uk-input" placeholder="Логин..." style="width: 300px" type="text">
+                                        <input class="uk-input" type="email" name="login-username" id="id_login-username" placeholder="Логин..." style="width: 300px">
                                     </div>
                                 </div>
 
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label class="uk-form-label">Пароль</label>
-                                        <input class="uk-input" placeholder="Пароль..." style="width: 300px"
+                                        <input class="uk-input" id="id_login-password" name="login-password" placeholder="Пароль..." style="width: 300px"
                                                type="password">
                                     </div>
                                 </div>
-
-                                <div class="uk-button uk-button-secondary" style="font-size: 11px">Забыли пароль?</div>
-                                <div class="uk-button uk-button-secondary"
-                                     style="background-color: #3058ff; color: white">Войти
-                                </div>
+                                <input type="hidden" name="login-redirect_url" id="id_login-redirect_url">
+                                <a href="{% url 'password-reset' %}"><div class="uk-button uk-button-secondary" style="font-size: 11px">Забыли пароль?</div></a>
+                                <input type="submit" class="uk-button uk-button-secondary" value="Войти"
+                                     style="background-color: #3058ff; color: white" name="login_submit">
                             </form>
                             <!--                                    Конец-->
                             <hr class="">

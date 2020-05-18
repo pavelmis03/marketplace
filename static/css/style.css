@@ -5,7 +5,7 @@
   white-space: nowrap;
 }
 
-.container-4 input#search{
+.container-4 input#searcher{
   width: 500px;
   height: 50px;
   background: #93969d;
@@ -19,19 +19,19 @@
   border-radius: 5px;
 }
 
-.container-4 input#search::-webkit-input-placeholder {
+.container-4 input#searcher::-webkit-input-placeholder {
    color: #65737e;
 }
  
-.container-4 input#search:-moz-placeholder { /* Firefox 18- */
+.container-4 input#searcher:-moz-placeholder { /* Firefox 18- */
    color: #65737e;  
 }
  
-.container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
+.container-4 input#searcher::-moz-placeholder {  /* Firefox 19+ */
    color: #65737e;  
 }
  
-.container-4 input#search:-ms-input-placeholder {  
+.container-4 input#searcher:-ms-input-placeholder {
    color: #65737e;  
 }
 
