@@ -25,6 +25,11 @@ class Market(models.Model):
         return self.name
 
 
+class MarketManager(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    market = models.ForeignKey(to=Market, on_delete=models.CASCADE)
+
+
 class Product(AbstractProduct):
     market = models.ForeignKey(to=Market, on_delete=models.CASCADE)
 
