@@ -1,17 +1,10 @@
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-    <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 980;">
+    <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 9999980;">
         <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo" href="#">Мульти-МАРКЕТ</a>
+            <a class="uk-navbar-item uk-logo" href="{{ homepage_url }}">Мульти-МАРКЕТ</a>
         </div>
         <!--        Блок поиска-->
-        <div class="uk-navbar-center">
-            <div class="box">
-                <div class="container-4">
-                    <input type="search" id="search" placeholder="Найдите, что искали..."/>
-                    <button class="icon"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </div>
+        {% include "oscar/partials/search.html" %}
         <!--Конец блока поиска-->
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
@@ -37,37 +30,136 @@
                             <button class="uk-offcanvas-close" type="button" uk-close></button>
                             {% if request.user.is_authenticated %}
                             <h2>{{user}}</h2>
+                            <p><em>{{ user.get_full_name|default:request.user.email }}</em></p>
+                            <div class="uk-button uk-button-secondary"
+                                 style="background-color: #3058ff; color: white; width: 270px"><a
+                                    href="{% url 'customer:notifications-inbox' %}">Мой профиль
+                            </a>
+                            </div>
+                            {% if user.is_staff or perms.partner.dashboard_access %}
+                            <div class="uk-button uk-button-secondary uk-margin"
+                                 style="background-color: #3058ff; color: white; width: 270px"><a
+                                    href="{% url 'dashboard:index' %}">Админка
+                            </a>
 
+                            </div>
+                            {% endif %}
+                            <div class="uk-button uk-button-secondary"
+                                 style="background-color: #3058ff; color: white; width: 270px"><a
+                                    href="/oscar/accounts/logout">Выйти
+                            </a>
+                            </div>
 
                             {% else %}
                             <h2>Войдите</h2>
                             <!--                                Форма авторизации-->
-                            <form style="text-align: left; margin: auto" method="post">
+                            <form id="login_form" action="/oscar/accounts/login/" style="text-align: left; margin: auto"
+                                  method="post">
+                                {% csrf_token %}
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label class="uk-form-label">E-mail</label>
-                                        <input class="uk-input" placeholder="Логин..." style="width: 300px" type="text">
+                                        <input class="uk-input" type="email" name="login-username"
+                                               id="id_login-username" placeholder="Логин..." style="width: 300px">
                                     </div>
                                 </div>
 
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label class="uk-form-label">Пароль</label>
-                                        <input class="uk-input" placeholder="Пароль..." style="width: 300px"
+                                        <input class="uk-input" id="id_login-password" name="login-password"
+                                               placeholder="Пароль..." style="width: 300px"
                                                type="password">
                                     </div>
                                 </div>
-
-                                <div class="uk-button uk-button-secondary" style="font-size: 11px">Забыли пароль?</div>
-                                <div class="uk-button uk-button-secondary"
-                                     style="background-color: #3058ff; color: white">Войти
-                                </div>
+                                <input type="hidden" name="login-redirect_url" id="id_login-redirect_url">
+                                <a href="{% url 'password-reset' %}">
+                                    <div class="uk-button uk-button-secondary" style="font-size: 11px">Забыли пароль?
+                                    </div>
+                                </a>
+                                <input type="submit" class="uk-button uk-button-secondary" value="Войти"
+                                       style="background-color: #3058ff; color: white" name="login_submit">
                             </form>
                             <!--                                    Конец-->
                             <hr class="">
-                            <div class="uk-button uk-button-secondary"
-                                 style="background-color: #3058ff; color: white; width: 270px">Зарегистрироваться
+                            <a href="#modal-registr" uk-toggle>
+                                <div class="uk-button uk-button-secondary"
+                                     style="background-color: #3058ff; color: white; width: 270px">Зарегистрироваться
+                                </div>
+                            </a>
+
+
+
+
+
+
+                            <div id="modal-registr" uk-modal>
+                                <div class="uk-modal-dialog">
+                                    <div class="uk-modal-header">
+                                        <h2 class="uk-modal-title">Регистрация</h2>
+                                    </div>
+                                    <form action="/oscar/accounts/login/" method="post">
+                                        {% csrf_token %}
+                                        <div class="uk-modal-body">
+                                            <div class="uk-margin">
+                                                <div class="">
+                                                    <label class="uk-form-label">Адрес электронной почты</label>
+                                                    <div class="uk-form-controls">
+                                                    <input class="uk-input" type="email" name="registration-email"
+                                                            placeholder="Логин...">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-margin">
+                                                <div class="">
+                                                    <label class="uk-form-label">Пароль</label>
+                                                    <div class="uk-form-controls">
+                                                    <input class="uk-input" name="registration-password1"
+                                                           placeholder="Пароль..."
+                                                           type="password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <div class="">
+                                                    <label class="uk-form-label">Подтвердите Пароль</label>
+                                                    <div class="uk-form-controls">
+                                                    <input class="uk-input" name="registration-password2"
+                                                           placeholder="Пароль..."
+                                                           type="password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="registration-redirect_url" id="id_registration-redirect_url">
+                                        <div class="uk-modal-footer uk-text-right">
+                                            <button class="uk-button uk-button-default uk-modal-close" type="button">
+                                                Отмена
+                                            </button>
+                                            <input type="submit" class="uk-button uk-button-primary"
+                                                   value="Зарегистрироваться">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                             {% endif %}

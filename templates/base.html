@@ -2,11 +2,12 @@
 <html lang="{{ LANGUAGE_CODE|default:'ru-ru' }}" class="{% block html_class %}no-js{% endblock %}">
 
     {% load static %}
-    {% load bootstrap4 %}
+
 
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{{ pagename }} – Мульти-МАРКЕТ{% endblock %}</title>
+<!--        Uikit-->
         <link rel="stylesheet" href="/static/css/uikit-rtl.css">
         <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
         <link rel="stylesheet" href="/static/css/uikit.css">
@@ -14,6 +15,14 @@
         <link rel="stylesheet" href="/static/css/style.css">
         <script src="/static/js/uikit-icons.js"></script>
         <script src="/static/js/uikit-icons.min.js"></script>
+<!--        -->
+
+<!--        bootstrap3 -->
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<!--        -->
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="created" content="{% now 'jS M Y h:i' %}" />
         <meta name="description" content="{% block description %}{% endblock %}" />
@@ -24,10 +33,7 @@
             <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
         {% endblock %}
 
-        {# Block where global CSS will go. #}
-            {% bootstrap_css %}
-            <link rel="stylesheet"
-                  href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css">
+
 
         {# Additional CSS - specific to certain pages #}
         {% block extrastyles %}{% endblock %}
@@ -46,9 +52,9 @@
         </header>
 
         <main role="main" class="container mt-3">
-            {% bootstrap_messages %}
 
-                {% block content %} {% endblock %}
+
+<!--                {% block content %} {% endblock %}-->
 
             {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
 
@@ -66,10 +72,9 @@
         {% block base_js  %}
             {% block cdn_scripts %}
                 <!-- jQuery -->
-                {% bootstrap_javascript jquery='full' %}
-                <script>
-                    window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')
-                </script>
+
+        <script src="/static/js/bootstrap.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
             {% endblock %}
         {% endblock %}
 

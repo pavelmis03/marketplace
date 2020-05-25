@@ -206,4 +206,6 @@ EMAIL_HOST_USER = 'shp.ms104.dev.marketplace.bot@gmail.com'
 SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
 EMAIL_HOST_PASSWORD = "promprog"
 
+
+# DJANGO-SHOP
 OSCAR_DEFAULT_CURRENCY = "RUB"  # валюта
