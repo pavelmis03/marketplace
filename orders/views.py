@@ -7,6 +7,13 @@ from cart.cart import Cart
 
 
 def order_create(request):
+    """
+    Страница оформления заказа
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)

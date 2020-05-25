@@ -5,6 +5,14 @@ from .models import Category, Product
 
 
 def product_list(request, category_slug=None):
+    """
+    Страница со списком товаров
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param category_slug: заготовка категории
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -21,6 +29,15 @@ def product_list(request, category_slug=None):
 
 
 def product_detail(request, id, slug):
+    """
+    Страница свойства товара
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: идентификатор
+    :param slug: заготовка
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
     context = {
