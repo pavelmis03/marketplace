@@ -13,10 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from oscar.defaults import *
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -28,7 +26,6 @@ SECRET_KEY = '(^bvf47lc+06+v+rul45ch(u!a1(&*p16a$vk#okso%thze6$z'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -48,7 +45,7 @@ INSTALLED_APPS = [
     'oscar.apps.checkout',
     'oscar.apps.address',
     'oscar.apps.shipping',
-    'oscar.apps.catalogue',
+    # 'oscar.apps.catalogue',
     'oscar.apps.catalogue.reviews',
     'oscar.apps.partner',
     'oscar.apps.basket',
@@ -73,6 +70,9 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
 
+    # customized apps
+    'apps.catalogue',
+
     # 3rd-party apps that oscar depends on
     'widget_tweaks',
     'haystack',
@@ -81,12 +81,6 @@ INSTALLED_APPS = [
     'django_tables2',
 
     'bootstrap4',
-    # 'shop',
-    # 'main',
-    # 'market',
-    # 'user',
-    # 'cart',
-    # 'orders',
 
     'main',
     'market',
@@ -126,7 +120,7 @@ TEMPLATES = [
         'DIRS': [
             'templates',
             'main/templates',
-            'market/templates',
+            'market/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -146,7 +140,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -157,7 +150,6 @@ DATABASES = {
         'ATOMIC_REQUESTS': True,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -177,7 +169,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -190,7 +181,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -207,10 +197,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # LOGIN_REDIRECT_URL = '/'
 # LOGOUT_REDIRECT_URL = '/'
 
-
 # EMAIL - для отправки сообщений со сбросом пароля
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_FILE_PATH = 'emails/email-messages/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -218,10 +206,4 @@ EMAIL_HOST_USER = 'shp.ms104.dev.marketplace.bot@gmail.com'
 SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
 EMAIL_HOST_PASSWORD = "promprog"
 
-
-# DJANGO-SHOP
-SHOP_DEFAULT_CURRENCY = 'RUB'  # Валюта
-SHOP_MONEY_FORMAT = '{amount} {currency}'  # Формат отображения данных
-DECIMAL_PLACES = 0  # Чтобы было без копеек
-
-CART_SESSION_ID = 'cart'
+OSCAR_DEFAULT_CURRENCY = "RUB"  # валюта

@@ -1,0 +1,192 @@
+{% extends "oscar/layout.html" %}
+
+{% load history_tags %}
+{% load currency_filters %}
+{% load reviews_tags %}
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+{% block title %}
+    {{ market }} | {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ market.description|default:""|striptags }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li><a href="">Магазины</a></li>
+    <li class="active">{{ market }}</li>
+
+    {% get_back_button as backbutton %}
+    {% if backbutton %}
+        <li class="pull-right">
+            <a href="{{ backbutton.url }}">
+                <i class="icon-arrow-left"></i> {{ backbutton.title }}
+            </a>
+        </li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block header %}
+<style>
+   body {
+    background-image: url({{ market.image.url }});
+    background-color: #c7b39b;
+   }
+</style>
+{% endblock header %}
+
+{% block content %}
+
+<article class="market_page"><!-- Start of market page -->
+
+    <div class="row">
+
+        {% block market_gallery %}
+        <div class="col-sm-6">
+
+        </div>
+        {% endblock %}
+
+        {% block market_main %}
+        <div class="col-sm-6 market_main">
+            {% comment %}
+            This is a but clunky here.  Better to have some kind of JS-driven dashboard menu that
+            pops out when clicked.  A bit like the Django-Debug-Toolbar button
+            {% endcomment %}
+
+            <h1>{{ market }}</h1>
+
+            {% block market_stock_record %}
+
+            {% endblock %}
+
+            {% iffeature "reviews" %}
+                {% include "oscar/catalogue/reviews/partials/review_stars.html" %}
+            {% endiffeature %}
+
+        </div><!-- /col-sm-6 -->
+        {% endblock %}
+
+    </div><!-- /row -->
+
+    {% block market_description %}
+        {% if market.description %}
+        <div id="market_description" class="sub-header">
+            <h2>Описание магазины</h2>
+        </div>
+        <p>{{ market.description|safe }}</p>
+        {% endif %}
+    {% endblock %}
+
+    {% block market_info %}
+    <div class="sub-header">
+        <h2>Информация о магазине</h2>
+    </div>
+    <table class="table table-striped">
+        {% if market.upc %}
+        <tr>
+            <th>{% trans "UPC" %}</th><td>{{ market.upc }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>Тип магазина</th><td>{{ market.get_market_class.name }}</td>
+        </tr>
+
+        {% if session.price.exists %}
+            <tr>
+                <th>{% trans "Price (excl. tax)" %}</th><td>{{ session.price.excl_tax|currency:session.price.currency }}</td>
+            </tr>
+            {% if session.price.is_tax_known %}
+                <tr>
+                    <th>{% trans "Price (incl. tax)" %}</th><td>{{ session.price.incl_tax|currency:session.price.currency }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Tax" %}</th><td>{{ session.price.tax|currency:session.price.currency }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>{% trans "Availability" %}</th>
+                <td>{{ session.availability.message }}</td>
+            </tr>
+        {% endif %}
+        {% for av in market.attribute_values.all %}
+            <tr>
+                <th>{{ av.attribute.name }}</th>
+                <td>{{ av.value_as_html }}</td>
+            </tr>
+        {% endfor %}
+        {% iffeature "reviews" %}
+            <tr>
+                <th>{% trans "Number of reviews" %}</th>
+                <td>{{ market.num_approved_reviews }}</td>
+            </tr>
+        {% endiffeature %}
+    </table>
+    {% endblock %}
+
+    {% iffeature "reviews" %}
+        {% block market_review %}
+        <section>
+            <div id="reviews" class="sub-header">
+                {% if market.num_approved_reviews > 3 %}
+                    <a href="{% url 'catalogue:reviews-list' market_slug=market.slug market_pk=market.id %}" class="btn pull-right">{% trans "See all reviews" %}</a>
+                {% endif %}
+                <h2>{% trans "Customer Reviews" %}</h2>
+            </div>
+
+            {% if market.num_approved_reviews == 0 %}
+                <p>
+                    {% if market|is_review_permitted:user %}
+                        {% url 'catalogue:reviews-add' market_slug=market.slug market_pk=market.id as add_review_url %}
+                            {% blocktrans %}This market does not have any reviews yet -
+                            <a href="{{ add_review_url }}#addreview">be the first to write one</a>.
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "This market does not have any reviews yet" %}.
+                    {% endif %}
+                </p>
+            {% else %}
+                <ol class="list-unstyled review-list">
+                    {% for review in market.reviews.approved.all|slice:":3" %}
+                        <li>
+                        {% include 'oscar/catalogue/partials/review.html' %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </section>
+        {% endblock market_review %}
+    {% endiffeature %}
+
+    {% with recommended_markets=market.sorted_recommended_markets|slice:":6" %}
+        {% if recommended_markets %}
+            <div class="sub-header">
+                <h2>{% trans "Recommended items" %}</h2>
+            </div>
+            <ul class="row">
+                {% for market in recommended_markets %}
+                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+
+
+</article><!-- End of market page -->
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}
