@@ -1,4 +1,4 @@
-{% extends 'django_tables2/table.html' %}
+,{% extends 'django_tables2/table.html' %}
 {% load django_tables2 %}
 {% load i18n %}
 
@@ -29,5 +29,5 @@
 {% block pagination %}
 {% with page_obj=table.page paginator=table.paginator %}
     {% include "oscar/dashboard/partials/pagination.html" %}
-{% endwith %}
+{% endwith %},,
 {% endblock pagination %}
