@@ -4,15 +4,6 @@ from cart.forms import CartAddProductForm
 from .models import Category, Product
 
 
-# class ProductListView(ListView):
-#     template_name = 'shop/product/list.html'
-#     queryset = Product.objects.all()
-#     def get_context_data(self, **kwargs):
-#         context = super(ProductListView, self).get_context_data(**kwargs)
-#         context['category_list'] = Category.objects.all()
-#         return context
-
-
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()

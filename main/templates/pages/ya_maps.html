@@ -1,5 +1,4 @@
-{% extends 'base/base.html' %}
-
+{% extends 'base.html' %}
 
 {% block content %}
     <h1>Тест Яндекс карт</h1>
@@ -64,4 +63,10 @@
     <div id="map" style="width: 600px; height: 400px"></div>
     <h2>Многоугольник</h2>
     <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4755e3b582968502e1d0f2cc7cca201794397e7a07a3d592d996077beefe9140&amp;width=700&amp;height=900&amp;lang=ru_RU&amp;scroll=true"></script>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript"
+        src="https://api-maps.yandex.ru/2.1/?apikey=a4f87bfa-49ea-423d-8727-02a713d3c955&lang=ru_RU">
+</script>
 {% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'ru-ru' }}" class="{% block html_class %}no-js{% endblock %}">
+
+    {% load static %}
+    {% load bootstrap4 %}
+
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ pagename }} – Мульти-МАРКЕТ{% endblock %}</title>
+        <link rel="stylesheet" href="/static/css/uikit-rtl.css">
+        <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
+        <link rel="stylesheet" href="/static/css/uikit.css">
+        <link rel="stylesheet" href="/static/css/uikit.min.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/js/uikit-icons.js"></script>
+        <script src="/static/js/uikit-icons.min.js"></script>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="created" content="{% now 'jS M Y h:i' %}" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
+        <meta name="robots" content="NOARCHIVE,NOCACHE" />
+
+        {% block favicon %}
+            <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+        {% endblock %}
+
+        {# Block where global CSS will go. #}
+            {% bootstrap_css %}
+            <link rel="stylesheet"
+                  href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css">
+
+        {# Additional CSS - specific to certain pages #}
+        {% block extrastyles %}{% endblock %}
+
+        {# Additional head tags - specific to certain pages #}
+        {% block extrahead %}{% endblock %}
+
+        {# tracking tags. Needed by OSCAR #}
+        {% block tracking %}{% endblock %}
+    </head>
+
+    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+
+        <header>
+            {% include 'navbar.html' %}
+        </header>
+
+        <main role="main" class="container mt-3">
+            {% bootstrap_messages %}
+
+                {% block content %} {% endblock %}
+
+            {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
+
+        </main>
+
+        <footer class="footer">
+            {% block footer %}
+                <div class="container text-right">
+                    <span class="text-muted">&copy; подгруппа web группы ms104 promprog ШП 2019-20, {% now "Y" %}</span>
+                </div>
+            {% endblock %}
+        </footer>
+
+
+        {% block base_js  %}
+            {% block cdn_scripts %}
+                <!-- jQuery -->
+                {% bootstrap_javascript jquery='full' %}
+                <script>
+                    window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')
+                </script>
+            {% endblock %}
+        {% endblock %}
+
+        {# Local scripts #}
+        {% block scripts %}{% endblock %}
+
+        {# Block for body onload functions #}
+        <script>
+            $(function() {
+                {% block onbodyload %}{% endblock %}
+            });
+        </script>
+
+        {% block extra_js %}
+            {# Additional JS scripts (OSCAR only) #}
+            {% block extrascripts %}{% endblock %}
+        {% endblock %}
+    </body>
+</html>
