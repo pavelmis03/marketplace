@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('oscar/', include(apps.get_app_config('oscar').urls[0]), name='oscar'),
     path('', main_views.index_page, name='index'),
+    path('', include('apps.catalogue.urls')),  # url для подмагазинов
     #path('', include(apps.get_app_config('oscar').urls[0])),
     #path('', include(catalog_urls)),
 
