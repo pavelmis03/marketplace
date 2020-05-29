@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.sites.models import Site
-from oscar.apps.basket.models import Basket
+from oscar.apps.basket.models import Basket, Line as BasketLine
 from oscar.apps.catalogue.models import Product, ProductClass, Category
-from oscar.apps.order.models import Order, OrderNote
+from oscar.apps.order.models import Order, Line as OrderLine, OrderNote, \
+    ShippingAddress
+from oscar.apps.partner.models import StockRecord, Partner
 from rest_framework import serializers
 
 
@@ -39,6 +41,29 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
                   'shipping_code', 'status', 'guest_email']
 
 
+class OrderLineSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = OrderLine
+        fields = [
+            # PARTNER INFORMATION
+            'order', 'partner', 'partner_name', 'partner_sku',
+            'partner_line_reference', 'partner_line_notes', 'stockrecord',
+
+            # PRODUCT INFORMATION
+            'product', 'title', 'upc', 'quantity',
+
+            # REPORTING INFORMATION
+            'line_price_incl_tax', 'line_price_excl_tax',
+            'line_price_before_discounts_incl_tax',
+            'line_price_before_discounts_excl_tax',
+            'unit_cost_price', 'unit_price_incl_tax',
+            'unit_price_excl_tax', 'unit_retail_price',
+
+            #
+            'status', 'est_dispatch_date',
+        ]
+
+
 class OrderNoteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OrderNote
@@ -62,3 +87,32 @@ class BasketSerializer(serializers.HyperlinkedModelSerializer):
         model = Basket
         fields = ['owner', 'status', 'vouchers', 'date_created',
                   'date_merged', 'date_submitted']
+
+
+class BasketLineSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = BasketLine
+        fields = ['basket', 'line_reference', 'product', 'stockrecord',
+                  'quantity', 'price_currency', 'price_excl_tax',
+                  'price_incl_tax', 'date_created']
+
+
+class ShippingAddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ShippingAddress
+        fields = ['phone_number', 'notes', ]
+
+
+class StockRecordSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = StockRecord
+        fields = ['product', 'partner', 'partner_sku', 'price_currency',
+                  'price_excl_tax', 'price_retail', 'cost_price',
+                  'num_in_stock', 'num_allocated', 'low_stock_threshold',
+                  'date_created', 'date_updated', ]
+
+
+class PartnerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Partner
+        fields = ['code', 'name', 'users', ]

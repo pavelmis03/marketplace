@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'django_tables2',
 
     'rest_framework',
+    'rest_framework.authtoken',  # https://www.django-rest-framework.org/api-guide/authentication/
 
     'bootstrap4',
 
@@ -210,10 +211,16 @@ SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
 EMAIL_HOST_PASSWORD = "promprog"
 
 
+# REST FRAMEWORK - для API
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.IsAdminUser',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.DjangoModelPermissions',
+    ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
 }

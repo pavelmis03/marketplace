@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include(apps.get_app_config('oscar').urls[0])),
 
     # API & bot
-    path('', include('botapp.urls')),
+    path('api/', include('botapp.urls')),
 
     # path('time/', main_views.time_page, name='time'),
 
