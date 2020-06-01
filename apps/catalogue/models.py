@@ -3,12 +3,11 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
-from oscar.models.fields import AutoSlugField
 from oscar.models.fields.slugfield import SlugField
 
 
 class Market(models.Model):
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, default=1)
     name = models.CharField(_('Name'), max_length=255, db_index=True)
     # slug = SlugField(_('Slug'), max_length=255, db_index=True)
     slug = SlugField(_('Slug'), max_length=255, db_index=True, unique=True)
@@ -31,7 +30,8 @@ class MarketManager(models.Model):
 
 
 class Product(AbstractProduct):
-    market = models.ForeignKey(to=Market, on_delete=models.CASCADE)
+    market = models.ForeignKey(to=Market, on_delete=models.CASCADE,
+                               null=True, blank=True)
 
 
 from oscar.apps.catalogue.models import *
