@@ -340,4 +340,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/linux,macos,python,django,windows,virtualenv,pycharm+all
+
+email/
 !/media/image_not_found.jpg
