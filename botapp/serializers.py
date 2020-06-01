@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.sites.models import Site
 from oscar.apps.basket.models import Basket, Line as BasketLine
-from oscar.apps.catalogue.models import Product, ProductClass, Category
+from oscar.apps.catalogue.models import ProductClass, Category
 from oscar.apps.order.models import Order, Line as OrderLine, OrderNote, \
     ShippingAddress
 from oscar.apps.partner.models import StockRecord, Partner
 from rest_framework import serializers
+
+from apps.catalogue.models import Product
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -23,7 +25,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product  # TODO: change Model, add Markets
-        fields = ['parent', 'title', 'slug', 'description',
+        fields = ['market', 'parent', 'title', 'slug', 'description',
                   'product_class', 'categories', ]
 
 

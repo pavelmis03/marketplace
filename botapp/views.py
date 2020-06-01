@@ -1,22 +1,19 @@
-from django.contrib.sites.models import Site
-from django.shortcuts import render
 from django.contrib.auth.models import User, Group
+from django.contrib.sites.models import Site
 from oscar.apps.basket.models import Basket, Line as BasketLine
-from oscar.apps.catalogue.models import Product, ProductClass, Category
+from oscar.apps.catalogue.models import ProductClass, Category
 from oscar.apps.order.models import Order, Line as OrderLine, OrderNote, \
     ShippingAddress
 from oscar.apps.partner.models import StockRecord, Partner
-from rest_framework import viewsets, generics
 from rest_framework import permissions
+from rest_framework import viewsets, generics
+
+from apps.catalogue.models import Product
 from botapp.serializers import UserSerializer, GroupSerializer, \
     ProductSerializer, ProductClassSerializer, OrderSerializer, \
     OrderNoteSerializer, CategorySerializer, SiteSerializer, BasketSerializer, \
     ShippingAddressSerializer, BasketLineSerializer, OrderLineSerializer, \
     StockRecordSerializer, PartnerSerializer
-
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
 
 
 # @api_view(['GET', 'POST'])
