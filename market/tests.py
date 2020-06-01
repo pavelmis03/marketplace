@@ -1,24 +1,26 @@
 from django import test
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.test import Client
 
 
 class URLTests(test.TestCase):
     def setUp(self):
         self.test_username = 'vasya'
         self.test_pass = 'promprog'
+        self.client = Client()
 
     def test_authorization_page(self):
         response = self.client.get('/accounts/login/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_catalogue_page(self):
         response = self.client.get('/catalogue/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 301)
 
     def test_basket_page(self):
         response = self.client.get('/basket/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_offers_page(self):
         response = self.client.get('/offers/')
