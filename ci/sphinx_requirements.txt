@@ -1,0 +1,2 @@
+Sphinx       # Тут бы ещё версию указать
+#django-debug-toolbar==1.11

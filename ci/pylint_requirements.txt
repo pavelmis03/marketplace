@@ -1,0 +1,8 @@
+# Code style
+pylint==2.5.0
+pylint-django==2.0.15
+
+django-debug-toolbar==1.11
+pylint-json2html==0.1.0
+anybadge==1.1.1
+
