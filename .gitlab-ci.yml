@@ -19,13 +19,14 @@ stages:
 test:
   stage: test
   before_script:
-  - pip install -r requirements.txt
+    - pip install -r requirements.txt
+    - pip install -r ci/tests_requirements.txt
   script:
-  - coverage run manage.py test
-  - coverage report --omit=manage.py
-  - coverage html --omit=manage.py
-  - mkdir public
-  - mv htmlcov public/coverage
+    - coverage run manage.py test
+    - coverage report --omit=manage.py
+    - coverage html --omit=manage.py
+    - mkdir public
+    - mv htmlcov public/coverage
   artifacts:
     paths:
       - public/coverage
@@ -34,9 +35,9 @@ test:
 pep8:
   stage: style
   before_script:
-  - pip install -r ci/pycodestyle_requirements.txt
+    - pip install -r ci/pycodestyle_requirements.txt
   script:
-  - ./ci/pycodestyle_runner.sh
+    - ./ci/pycodestyle_runner.sh
   artifacts:
     paths:
       - public/pycodestyle.txt
@@ -45,9 +46,9 @@ pep8:
 pylint:
   stage: style
   before_script:
-  - pip install -r ci/pylint_requirements.txt
+    - pip install -r ci/pylint_requirements.txt
   script:
-  - ./ci/pylint_runner.sh
+    - ./ci/pylint_runner.sh
   artifacts:
     paths:
       - public/pylint.svg
@@ -57,13 +58,13 @@ pylint:
 sphinx:
   stage: docs
   before_script:
-  - pip install -r ci/sphinx_requirements.txt
+    - pip install -r ci/sphinx_requirements.txt
   script:
-  - cd docs
-  - export PYTHONPATH=..
-  - make html
-  - cd ..
-  - mv docs/build/html public/docs
+    - cd docs
+    - export PYTHONPATH=..
+    - make html
+    - cd ..
+    - mv docs/build/html public/docs
   artifacts:
     paths:
       - public/docs
