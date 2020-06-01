@@ -12,15 +12,15 @@ class URLTests(test.TestCase):
 
     def test_authorization_page(self):
         response = self.client.get('/accounts/login/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
     def test_catalogue_page(self):
         response = self.client.get('/catalogue/')
-        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response.status_code, 200)
 
     def test_basket_page(self):
         response = self.client.get('/basket/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_offers_page(self):
         response = self.client.get('/offers/')
