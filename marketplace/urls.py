@@ -27,20 +27,15 @@ urlpatterns = [
     # Oscar # TODO: установить нужный под'url для oscar'овских страниц
     path('', include(apps.get_app_config('oscar').urls[0])),
 
-
-    # Подмагазины
+    # Кастомизированные приложения - catalogue (для подмагазинов)
     path('', include('apps.catalogue.urls')),
 
     # API
-    path('api/', include('api.urls')),
+    path('api/', include('api.urls'), name="api"),
 
     # Яндек-интеграции
     path('ya/', include([
         path('maps/', main_views.ya_maps_page, name='ya_maps'),
         path('safety/', main_views.ya_safetly_page, name='ya_safety'),
     ])),
-
-    # Остальное
-    # path('', main_views.index_page, name='index'),
-    # path('time/', main_views.time_page, name='time'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
