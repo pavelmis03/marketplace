@@ -86,9 +86,7 @@ INSTALLED_APPS = [
     'bootstrap4',
 
     'main',
-    'market',
-    'user',
-    'botapp',
+    'api',
 ]
 
 SITE_ID = 1
@@ -122,9 +120,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'templates',
+            # 'templates',  # MOVED to 'market/templates/'!
             'main/templates',
-            'market/templates'
+            'market/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -137,6 +135,8 @@ TEMPLATES = [
                 'oscar.apps.checkout.context_processors.checkout',
                 'oscar.apps.customer.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
+
+                'main.context_processors.navbar',
             ],
         },
     },

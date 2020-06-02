@@ -25,22 +25,22 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Oscar # TODO: установить нужный под'url для oscar'овских страниц
-    path('', include(apps.get_app_config('oscar').urls[0]), name='oscar'),
+    path('', include(apps.get_app_config('oscar').urls[0])),
 
 
     # Подмагазины
     path('', include('apps.catalogue.urls')),
 
-    # API & bot
-    path('api/', include('botapp.urls')),
+    # API
+    path('api/', include('api.urls')),
 
     # Яндек-интеграции
-    path('ya_safety/', main_views.time_page, name='ya_safety'),
-    path('ya_maps/', main_views.ya_maps, name='ya_maps'),
+    path('ya/', include([
+        path('maps/', main_views.ya_maps_page, name='ya_maps'),
+        path('safety/', main_views.ya_safetly_page, name='ya_safety'),
+    ])),
 
     # Остальное
-    path('', main_views.index_page, name='index'),
-    path('user/', include('user.urls')),
+    # path('', main_views.index_page, name='index'),
     # path('time/', main_views.time_page, name='time'),
-    # path('market/', include('market.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

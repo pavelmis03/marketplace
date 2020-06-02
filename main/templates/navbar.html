@@ -46,14 +46,14 @@
                             {% endif %}
                             <div class="uk-button uk-button-secondary"
                                  style="background-color: #3058ff; color: white; width: 270px"><a
-                                    href="/oscar/accounts/logout">Выйти
+                                    href="{% url 'customer:logout' %}">Выйти
                             </a>
                             </div>
 
                             {% else %}
                             <h2>Войдите</h2>
                             <!--                                Форма авторизации-->
-                            <form id="login_form" action="/oscar/accounts/login/" style="text-align: left; margin: auto"
+                            <form id="login_form" action="{% url 'customer:login' %}" style="text-align: left; margin: auto"
                                   method="post">
                                 {% csrf_token %}
                                 <div class="uk-margin">
@@ -98,7 +98,7 @@
                                     <div class="uk-modal-header">
                                         <h2 class="uk-modal-title">Регистрация</h2>
                                     </div>
-                                    <form action="/oscar/accounts/login/" method="post">
+                                    <form action="{% url 'customer:login' %}" method="post">
                                         {% csrf_token %}
                                         <div class="uk-modal-body">
                                             <div class="uk-margin">

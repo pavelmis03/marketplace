@@ -9,7 +9,7 @@ from rest_framework import permissions
 from rest_framework import viewsets, generics
 
 from apps.catalogue.models import Product
-from botapp.serializers import UserSerializer, GroupSerializer, \
+from api.serializers import UserSerializer, GroupSerializer, \
     ProductSerializer, ProductClassSerializer, OrderSerializer, \
     OrderNoteSerializer, CategorySerializer, SiteSerializer, BasketSerializer, \
     ShippingAddressSerializer, BasketLineSerializer, OrderLineSerializer, \
