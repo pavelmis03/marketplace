@@ -1,3 +1,4 @@
+# pylint: disable=too-many-ancestors
 from django.contrib.auth.models import User, Group
 from django.contrib.sites.models import Site
 from oscar.apps.basket.models import Basket, Line as BasketLine

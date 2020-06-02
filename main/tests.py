@@ -1,3 +1,4 @@
+# pylint: disable=missing-function-docstring
 from django import test
 from django.test import Client
 
