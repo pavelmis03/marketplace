@@ -10,8 +10,6 @@ cache:
 
 
 default:
-  tags:
-    - django
   before_script:
     - python -V
     - virtualvenv venv
