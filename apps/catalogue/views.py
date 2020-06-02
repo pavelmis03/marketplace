@@ -4,6 +4,8 @@ from django.utils.http import urlquote
 from django.views.generic import DetailView
 
 # from oscar.apps.catalogue.signals import product_viewed
+from oscar.apps.catalogue.views import CatalogueView as OscarCatalogueView
+
 from apps.catalogue.models import Market
 
 
@@ -118,3 +120,10 @@ def market_view(request, slug):
     print(slug, markets, markets[0].image, markets[0].image.url)
 
     return render(request, 'market.html', context)
+
+
+class CatalogueView(OscarCatalogueView):
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['markets'] = Market.objects.all()
+        return ctx
