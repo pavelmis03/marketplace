@@ -1,4 +1,4 @@
-# pylint: disable=missing-function-docstring
+# pylint: disable=missing-function-docstring,invalid-name
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
