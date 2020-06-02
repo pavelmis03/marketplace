@@ -20,6 +20,7 @@ router.register(r'basket-line', views.BasketLineViewSet)
 router.register(r'shippingaddress', views.ShippingAddressViewSet)
 router.register(r'stockrecord', views.StockRecordViewSet)
 router.register(r'partner', views.PartnerViewSet)
+router.register(r'market', views.MarketViewSet)
 
 
 urlpatterns = [

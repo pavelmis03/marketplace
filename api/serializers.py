@@ -7,7 +7,7 @@ from oscar.apps.order.models import Order, Line as OrderLine, OrderNote, \
 from oscar.apps.partner.models import StockRecord, Partner
 from rest_framework import serializers
 
-from apps.catalogue.models import Product
+from apps.catalogue.models import Product, Market
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,9 +24,15 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Product  # TODO: change Model, add Markets
+        model = Product
         fields = ['market', 'parent', 'title', 'slug', 'description',
                   'product_class', 'categories', ]
+
+
+class MarketSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Market
+        fields = ['owner', 'name', 'slug', 'description', 'image']
 
 
 class ProductClassSerializer(serializers.HyperlinkedModelSerializer):

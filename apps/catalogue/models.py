@@ -1,5 +1,4 @@
-# from oscar.apps.catalogue.models import *  # noqa isort:skip
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # noqa isort:skip
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
@@ -9,10 +8,10 @@ from oscar.models.fields.slugfield import SlugField
 class Market(models.Model):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, default=1)
     name = models.CharField(_('Name'), max_length=255, db_index=True)
-    # slug = SlugField(_('Slug'), max_length=255, db_index=True)
     slug = SlugField(_('Slug'), max_length=255, db_index=True, unique=True)
     description = models.TextField(_('Description'), blank=True)
-    image = models.ImageField(_('Image'), upload_to='markets', blank=True, null=True, max_length=255)
+    image = models.ImageField(_('Image'), upload_to='markets', blank=True,
+                              null=True, max_length=255)
 
     class Meta:
         app_label = 'catalogue'
@@ -34,4 +33,7 @@ class Product(AbstractProduct):
                                null=True, blank=True)
 
 
+# ОБЯЗАТЕЛЬНЫЙ ИМПОРТ ОСТАЛЬНЫХ МОДЕЛЕЙ
 from oscar.apps.catalogue.models import *
+
+Category  # Чтобы PyCharm не предлагал убрать этот импорт как неиспользуемый

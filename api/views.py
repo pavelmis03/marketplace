@@ -8,12 +8,12 @@ from oscar.apps.partner.models import StockRecord, Partner
 from rest_framework import permissions
 from rest_framework import viewsets, generics
 
-from apps.catalogue.models import Product
+from apps.catalogue.models import Product, Market
 from api.serializers import UserSerializer, GroupSerializer, \
     ProductSerializer, ProductClassSerializer, OrderSerializer, \
     OrderNoteSerializer, CategorySerializer, SiteSerializer, BasketSerializer, \
     ShippingAddressSerializer, BasketLineSerializer, OrderLineSerializer, \
-    StockRecordSerializer, PartnerSerializer
+    StockRecordSerializer, PartnerSerializer, MarketSerializer
 
 
 # @api_view(['GET', 'POST'])
@@ -84,6 +84,12 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class MarketViewSet(viewsets.ModelViewSet):
+    queryset = Market.objects.all()
+    serializer_class = MarketSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

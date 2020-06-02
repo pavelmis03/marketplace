@@ -12,7 +12,7 @@ BAD_SITES = [
 
 def get_base_context(request, pagename='UNTITLED'):
     raise NotImplementedError(
-        "Получение меню перенесенов в конекстный процессов"
+        "Получение меню перенесено в конекстный процессов"
         "`main.context_processors.navbar`. Эта функция на удаление."
     )
 #     TODO: Удалить
