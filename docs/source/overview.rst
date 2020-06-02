@@ -46,7 +46,7 @@
 Профиль
 ~~~~~~~
 
-.. image:: _doc_pictures/account_profile.png
+.. image:: doc_pictures/account_profile.png
 
 1) Здесь показано имя и фамилия, которые вы ввели, если вы ничего не вводили тут стоит прочерк
 2) Здесь указана ваша почта

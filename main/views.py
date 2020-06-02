@@ -56,11 +56,12 @@ def ya_maps_page(request):
 
 def ya_safetly_page(request):
     """
-    Страница 'Дата и время'
+    Страница Яндекс-Безопасность
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
     :return: перенаправление на главную страницу в случае POST-запроса
+    :rtype: :class:`django.http.HttpResponse`
     """
     context = {
         'pagename': "Проверка сайта",
