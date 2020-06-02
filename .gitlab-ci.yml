@@ -1,13 +1,24 @@
 image: python:3.7
 
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
+
 cache:
   paths:
-    - ~/.cache/pip/
+    - .cache/pip/
+    - venv
 
-before_script:
-  - python -V
-  - apt-get update
-  - apt-get install ssh-client
+
+default:
+  tags:
+    - django
+  before_script:
+    - python -V
+    - virtualvenv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+
 
 stages:
   - test
@@ -18,10 +29,8 @@ stages:
 
 test:
   stage: test
-  before_script:
-    - pip install -r requirements.txt
-    - pip install -r ci/tests_requirements.txt
   script:
+    - pip install -r ci/tests_requirements.txt
     - coverage run manage.py test
     - coverage report --omit=manage.py
     - coverage html --omit=manage.py
@@ -34,9 +43,8 @@ test:
 
 pep8:
   stage: style
-  before_script:
-    - pip install -r ci/pycodestyle_requirements.txt
   script:
+    - pip install -r ci/pycodestyle_requirements.txt
     - ./ci/pycodestyle_runner.sh
   artifacts:
     paths:
@@ -45,10 +53,8 @@ pep8:
 
 pylint:
   stage: style
-  before_script:
-    - pip install -r requirements.txt
-    - pip install -r ci/pylint_requirements.txt
   script:
+    - pip install -r ci/pylint_requirements.txt
     - ./ci/pylint_runner.sh
   artifacts:
     paths:
@@ -58,15 +64,15 @@ pylint:
 
 sphinx:
   stage: docs
-  before_script:
-    - pip install -r requirements.txt
-    - pip install -r ci/sphinx_requirements.txt
   script:
+    - pip install -r ci/sphinx_requirements.txt
     - cd docs
     - export PYTHONPATH=..
     - make html
     - cd ..
     - mv docs/build/html public/docs
+  only:
+    - develop
   artifacts:
     paths:
       - public/docs
@@ -87,6 +93,8 @@ pages:
 upload_to_server:
   stage: deploy
   before_script:
+    - apt-get update
+    - apt-get install ssh-client
     - apt-get install -qq git
     - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
