@@ -29,11 +29,11 @@ class URLTests(test.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_yamaps_page(self):
-        response = self.client.get('/ya_maps/')
+        response = self.client.get('/ya/maps/')
         self.assertEqual(response.status_code, 200)
 
     def test_yasafety_page(self):
-        response = self.client.get('/ya_safety/')
+        response = self.client.get('/ya/safety/')
         self.assertEqual(response.status_code, 200)
 
     def test_dashboard_page(self):
