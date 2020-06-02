@@ -71,6 +71,18 @@ sphinx:
       - public/docs
 
 
+pages:
+  stage: deploy
+  script:
+    - echo 'Publish pages data'
+  artifacts:
+    paths:
+      - public
+  only:
+    - develop
+    - master
+
+
 upload_to_server:
   stage: deploy
   before_script:
