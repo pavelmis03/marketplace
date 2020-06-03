@@ -1,5 +1,8 @@
 # Проект "MarketPlace"
 
+#### [Документация](https://2019-2020.pages.gitlab.informatics.ru/mytischi/ms104/marketplace/docs/index.html)
+#### [Использованные паттерны](PATTERNS.md)
+
 ### Цель
 Сделать Marketplace
 
@@ -32,3 +35,4 @@ Password: promprog
 Password (repeat): promprog
 ```
 9. Создать конфигурацию запуска в PyCharm (файл `manage.py`, опция `runserver`)
+

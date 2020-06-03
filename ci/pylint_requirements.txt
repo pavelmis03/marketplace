@@ -1,0 +1,5 @@
+# Code style
+pylint==2.5.2
+pylint-django==2.0.15
+pylint-json2html==0.2.0
+anybadge==1.7.0

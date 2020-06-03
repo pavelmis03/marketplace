@@ -1,0 +1,46 @@
+{% load reviews_tags %}
+{% load image_tags %}
+{% load i18n %}
+{% load display_tags %}
+{% load staticfiles %}
+
+{% block product %}
+    <div class="uk-card uk-card-default" style="width: 250px; height: 450px; margin-bottom: 15px;">
+        {% block product_image %}
+            <div class="uk-card-media-top">
+                {% with image=product.primary_image %}
+                    {% oscar_thumbnail image.original "x155" upscale=False as thumb %}
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="/static/img/inf.jpg" alt="{{ product.get_title }}" class="">
+                    </a>
+                {% endwith %}
+            </div>
+        {% endblock %}
+
+        {% block product_review %}
+            {% iffeature "reviews" %}
+                <p class="star-rating {{ product.rating|as_stars }}">
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                </p>
+            {% endiffeature %}
+        {% endblock %}
+
+        {% block product_title %}
+            <h3 class="uk-card-title" style="width: 240px; height: 50px; font-size: 20px; margin-left:15px;"><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{ product.get_title|truncatewords:4 }}</a></h3>
+        {% endblock %}
+        <div class="uk-card-body">
+        {% block product_price %}
+            <div class="product_price">
+                {% include "oscar/catalogue/partials/stock_record.html" %}
+                {% if not product.is_parent and not product.has_options %}
+                    {% include "oscar/catalogue/partials/add_to_basket_form_compact.html" %}
+                {% endif %}
+            </div>
+        {% endblock %}
+        </div>
+    </div>
+{% endblock %}
