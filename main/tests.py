@@ -255,7 +255,7 @@ class AuthTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class PagesOscarTest(TestCase):
+class PagesTest(TestCase):
     """
     Проверка на доступность остальных страниц
     """
