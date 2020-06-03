@@ -1,3 +1,5 @@
+{% load static %}
+
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
     <nav class="uk-navbar-container" uk-navbar="dropbar: true;" style="position: relative; z-index: 9999980;">
         <div class="uk-navbar-left">
@@ -9,8 +11,8 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <li>
-                    <a href="">
-                        <img src="/static/img/cart.png" style="height: 45px" style="vertical-align: bottom" alt="">
+                    <a href="{% url 'basket:summary' %}">
+                        <img src="{% static '/img/cart.png' %}" style="height: 45px" style="vertical-align: bottom" alt="">
                         <span class="uk-badge" style="margin-top: -60%">0</span>
                     </a>
                 </li>
@@ -20,7 +22,7 @@
                 <li>
                     <a class="uk-navbar-toggle" type="button" uk-toggle="target: #offcanvas-flip">
                         <!--                            <span class="uk-margin-small-right">Меню пользователя</span> -->
-                        <img src="/static/img/user.png" alt="Avatar" class="avatar uk-margin-small-right card">
+                        <img src="{% static '/img/user.png' %}" alt="Avatar" class="avatar uk-margin-small-right card">
                         <span uk-navbar-toggle-icon></span>
                     </a>
 
@@ -90,9 +92,6 @@
 
 
 
-
-
-
                             <div id="modal-registr" uk-modal>
                                 <div class="uk-modal-dialog">
                                     <div class="uk-modal-header">
@@ -145,23 +144,6 @@
                             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             {% endif %}
                         </div>
                     </div>
@@ -173,7 +155,8 @@
 <form>
 
 </form>
-<script src="https://use.fontawesome.com/850c66bc1f.js"></script>
 
-<script src="/static/js/uikit.js"></script>
-<script src="/static/js/uikit.min.js"></script>
+{% block extra_js_navbar %}
+    <script src="https://use.fontawesome.com/850c66bc1f.js"></script>
+    <script src="{% static '/js/uikit.min.js' %}"></script>
+{% endblock %}

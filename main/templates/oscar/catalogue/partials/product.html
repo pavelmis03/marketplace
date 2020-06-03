@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load display_tags %}
 {% load staticfiles %}
+{% load static %}
 
 {% block product %}
     <div class="uk-card uk-card-default" style="width: 250px; height: 450px; margin-bottom: 15px;">
@@ -11,7 +12,7 @@
                 {% with image=product.primary_image %}
                     {% oscar_thumbnail image.original "x155" upscale=False as thumb %}
                     <a href="{{ product.get_absolute_url }}">
-                        <img src="/static/img/inf.jpg" alt="{{ product.get_title }}" class="">
+                        <img src="{% static '/img/inf.jpg' %}" alt="{{ product.get_title }}" class="">
                     </a>
                 {% endwith %}
             </div>
