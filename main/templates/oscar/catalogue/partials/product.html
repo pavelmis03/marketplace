@@ -5,13 +5,13 @@
 {% load staticfiles %}
 
 {% block product %}
-    <article class="product_pod">
+    <div class="uk-card uk-card-default" style="width: 250px; height: 450px; margin-bottom: 15px;">
         {% block product_image %}
-            <div class="image_container">
+            <div class="uk-card-media-top">
                 {% with image=product.primary_image %}
                     {% oscar_thumbnail image.original "x155" upscale=False as thumb %}
                     <a href="{{ product.get_absolute_url }}">
-                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}" class="thumbnail">
+                        <img src="/static/img/inf.jpg" alt="{{ product.get_title }}" class="">
                     </a>
                 {% endwith %}
             </div>
@@ -30,9 +30,9 @@
         {% endblock %}
 
         {% block product_title %}
-            <h3><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{ product.get_title|truncatewords:4 }}</a></h3>
+            <h3 class="uk-card-title" style="width: 240px; height: 50px; font-size: 20px; margin-left:15px;"><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{ product.get_title|truncatewords:4 }}</a></h3>
         {% endblock %}
-
+        <div class="uk-card-body">
         {% block product_price %}
             <div class="product_price">
                 {% include "oscar/catalogue/partials/stock_record.html" %}
@@ -41,5 +41,6 @@
                 {% endif %}
             </div>
         {% endblock %}
-    </article>
+        </div>
+    </div>
 {% endblock %}
