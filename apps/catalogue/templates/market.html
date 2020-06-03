@@ -35,17 +35,18 @@
 </ul>
 {% endblock %}
 
-{% block header %}
-<style>
-   body {
-    background-image: url({{ market.image.url }});
-    background-color: #c7b39b;
-   }
-</style>
-{% endblock header %}
 
-{% block content %}
+{% block extrastyles %}
+    <style>
+       body {
+        background-image: url({{ market.image.url }});
+        background-color: #c7b39b;
+       }
+    </style>
+{% endblock %}
 
+
+{% block layout %}
 <article class="market_page"><!-- Start of market page -->
 
     <div class="row">
@@ -185,7 +186,7 @@
 
 
 </article><!-- End of market page -->
-{% endblock content %}
+{% endblock layout %}
 
 {% block extrascripts %}
     {{ block.super }}

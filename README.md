@@ -1,6 +1,7 @@
 # Проект "MarketPlace"
 
 #### [Документация](https://2019-2020.pages.gitlab.informatics.ru/mytischi/ms104/marketplace/docs/index.html)
+#### [Использованные паттерны](PATTERNS.md)
 
 ### Цель
 Сделать Marketplace
