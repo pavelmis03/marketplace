@@ -30,5 +30,13 @@
         "is_active": true,
         "date_joined": "2020-05-29T16:40:31.849Z"
     }
+},
+{
+    "model": "authtoken.token",
+    "pk": "a98bdc9bb3962e25b756cd165d34e91ae81ab333",
+    "fields": {
+        "user": 1,
+        "created": "2020-06-03T11:24:10.182Z"
+    }
 }
 ]

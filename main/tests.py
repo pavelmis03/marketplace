@@ -82,18 +82,18 @@ class URLTests(TestCase):
         self.client.login(username=self.test_username, password=self.test_pass)
         response = self.client.get('/dashboard/catalogue/', follow=True)
         self.assertEqual(response.status_code, 200)
-    #
-    # def test_dashboard_catalogue_alerts_page(self):
-    #     self.client.login(username=self.test_username, password=self.test_pass)
-    #     response = self.client.get('/dashboard/catalogue/stock-alerts/',
-    #                                follow=True)
-    #     self.assertEqual(response.status_code, 200)
-    #
-    # def test_dashboard_catalogue_options_page(self):
-    #     self.client.login(username=self.test_username, password=self.test_pass)
-    #     response = self.client.get('/dashboard/catalogue/option/', follow=True)
-    #     self.assertEqual(response.status_code, 200)
-    #
+
+    def test_dashboard_catalogue_alerts_page(self):
+        self.client.login(username=self.test_username, password=self.test_pass)
+        response = self.client.get('/dashboard/catalogue/stock-alerts/',
+                                   follow=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_dashboard_catalogue_options_page(self):
+        self.client.login(username=self.test_username, password=self.test_pass)
+        response = self.client.get('/dashboard/catalogue/option/', follow=True)
+        self.assertEqual(response.status_code, 200)
+
     # def test_dashboard_reviews_page(self):
     #     self.client.login(username=self.test_username, password=self.test_pass)
     #     response = self.client.get('/dashboard/reviews/', follow=True)
