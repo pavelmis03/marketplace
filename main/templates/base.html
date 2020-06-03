@@ -52,9 +52,9 @@
         </header>
 
         <main role="main" class="container mt-3">
-            {% block content %} {% endblock %}
 
             {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
+            {% block content %}{% endblock %}
 
         </main>
 
@@ -70,8 +70,7 @@
         {% block base_js  %}
             {% block cdn_scripts %}
                 <!-- jQuery -->
-
-                <script src="{% static '/js/bootstrap.js' %}"></script>
+                <script src="{% static '/js/jquery.min.js' %}"></script>
                 <script src="{% static '/js/bootstrap.min.js' %}"></script>
             {% endblock %}
         {% endblock %}
