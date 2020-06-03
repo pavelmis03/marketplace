@@ -11,6 +11,14 @@ BAD_SITES = [
 
 
 def get_base_context(request, pagename='UNTITLED'):
+    """
+    Получение базового контекста
+
+    :param request: объект c деталями запроса. Используется для получения авторизованного пользователя
+    :type request: :class:`django.http.HttpRequest`
+    :param pagename: название страницы, по умолчанию его значение 'UNTITLED'
+    :return: словарь с предустановленными значениями
+    """
     raise NotImplementedError(
         "Получение меню перенесено в конекстный процессов"
         "`main.context_processors.navbar`. Эта функция на удаление."

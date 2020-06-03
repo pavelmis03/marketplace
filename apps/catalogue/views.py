@@ -5,6 +5,14 @@ from apps.catalogue.models import Market
 
 
 def market_detail_view(request, slug):
+    """
+    Страница поиска заданного товара по магазинам
+
+    :param request: объект c деталями запроса
+    :param slug: ключевое слово - параметр фильтра
+    :return: объект ответа сервера с HTML-кодом внутри
+    :rtype: :class:`django.http.HttpResponse`
+    """
     context = {
         'found': False,
     }
