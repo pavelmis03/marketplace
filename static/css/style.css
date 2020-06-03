@@ -5,6 +5,10 @@
   white-space: nowrap;
 }
 
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+
 .container-4 input#searcher{
   width: 500px;
   height: 50px;

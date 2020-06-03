@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:'ru-ru' }}" class="{% block html_class %}no-js{% endblock %}">
 
-    {% load static %}
+  {% load static %}
 
 
     <head>
@@ -83,12 +83,15 @@
             $(function() {
                 {% block onbodyload %}{% endblock %}
             });
-        </script>
-
         {% block extra_js %}
             {# Additional JS scripts (OSCAR only) #}
         {% endblock %}
         {% block extrascripts %}{% endblock %}
         {% block extra_js_navbar %}{% endblock %}
     </body>
+
+
+</script>
+</body>
+
 </html>

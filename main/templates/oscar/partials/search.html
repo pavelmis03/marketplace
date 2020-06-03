@@ -10,7 +10,14 @@
 
 <script>
     search_but.addEventListener('click', function() {
-        let s = "{% url 'search:search' %}" + "?q=" + searcher[0].value;
+        let s = "{% url 'search:search' %}" + "?q=" + searcher.value;
         location = s;
     });
+    searcher.addEventListener('keydown', function(e) {
+        if (e.keyCode == 13) {
+            let s = "{% url 'search:search' %}" + "?q=" + searcher.value;
+            location = s;
+         }
+    });
+
 </script>
