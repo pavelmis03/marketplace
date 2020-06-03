@@ -35,6 +35,7 @@
         <div class="uk-card-body">
         {% block product_price %}
             <div class="product_price">
+                {{ product.market }}
                 {% include "oscar/catalogue/partials/stock_record.html" %}
                 {% if not product.is_parent and not product.has_options %}
                     {% include "oscar/catalogue/partials/add_to_basket_form_compact.html" %}
