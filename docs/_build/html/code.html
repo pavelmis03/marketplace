@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Документация для программиста &mdash; документация Marketplace v1.0</title>
+  <title>Документация разработчика &mdash; документация Marketplace v1.0</title>
   
 
   
@@ -83,10 +83,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Документация пользователя</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Документация для программиста</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">Модели в БД</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Документация разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-main.models">Модели в БД</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">Используемые формы</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#view">View-функции</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-main.views">View-функции</a></li>
 </ul>
 </li>
 </ul>
@@ -134,7 +134,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Документация для программиста</li>
+      <li>Документация разработчика</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,15 +154,115 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>Документация для программиста<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
-<div class="section" id="id2">
-<h2>Модели в БД<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<h1>Документация разработчика<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="section" id="module-main.models">
+<span id="id2"></span><h2>Модели в БД<a class="headerlink" href="#module-main.models" title="Ссылка на этот заголовок">¶</a></h2>
 </div>
 <div class="section" id="id3">
 <h2>Используемые формы<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 </div>
-<div class="section" id="view">
-<h2>View-функции<a class="headerlink" href="#view" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="section" id="module-main.views">
+<span id="view"></span><h2>View-функции<a class="headerlink" href="#module-main.views" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py function">
+<dt id="main.views.get_base_context">
+<code class="sig-prename descclassname">main.views.</code><code class="sig-name descname">get_base_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">pagename</span><span class="o">=</span><span class="default_value">'UNTITLED'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main/views.html#get_base_context"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#main.views.get_base_context" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение базового контекста</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса. Используется для получения авторизованного пользователя</p></li>
+<li><p><strong>pagename</strong> – название страницы, по умолчанию его значение „UNTITLED“</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>словарь с предустановленными значениями</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="main.views.index_page">
+<code class="sig-prename descclassname">main.views.</code><code class="sig-name descname">index_page</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main/views.html#index_page"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#main.views.index_page" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Главная страница</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>объект ответа сервера с HTML-кодом внутри</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpResponse</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="main.views.time_page">
+<code class="sig-prename descclassname">main.views.</code><code class="sig-name descname">time_page</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main/views.html#time_page"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#main.views.time_page" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Страница „Дата и время“</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>перенаправление на главную страницу в случае POST-запроса</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="main.views.ya_maps">
+<code class="sig-prename descclassname">main.views.</code><code class="sig-name descname">ya_maps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main/views.html#ya_maps"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#main.views.ya_maps" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Страница Яндекс-Карты</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>объект ответа сервера с HTML-кодом внутри</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpResponse</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-market.views"></span><dl class="py function">
+<dt id="market.views.product_detail">
+<code class="sig-prename descclassname">market.views.</code><code class="sig-name descname">product_detail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">slug</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/market/views.html#product_detail"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#market.views.product_detail" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Страница свойства товара</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса</p></li>
+<li><p><strong>id</strong> – идентификатор</p></li>
+<li><p><strong>slug</strong> – заготовка</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>объект ответа сервера с HTML-кодом внутри</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="market.views.product_list">
+<code class="sig-prename descclassname">market.views.</code><code class="sig-name descname">product_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">category_slug</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/market/views.html#product_list"><span class="viewcode-link">[исходный код]</span></a><a class="headerlink" href="#market.views.product_list" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Страница со списком товаров</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – объект c деталями запроса</p></li>
+<li><p><strong>category_slug</strong> – заготовка категории</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p>объект ответа сервера с HTML-кодом внутри</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 

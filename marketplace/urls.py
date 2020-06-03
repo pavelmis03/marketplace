@@ -24,10 +24,10 @@ from marketplace import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/index/', main_views.view_docs),
-    path('docs/code/', main_views.view_docs_code),
-    path('docs/search/', main_views.view_docs_search),
-    path('docs/genindex/', main_views.view_docs_genindex),
-    path('docs/overview/', main_views.view_docs_overview),
+    #path('docs/code/', main_views.view_docs_code),
+    #path('docs/search/', main_views.view_docs_search),
+    #path('docs/genindex/', main_views.view_docs_genindex),
+    #path('docs/overview/', main_views.view_docs_overview),
     path('', main_views.index_page, name='index'),
     path('', include(apps.get_app_config('oscar').urls[0]), name='index'),
 

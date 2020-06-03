@@ -1,4 +1,4 @@
-Документация для программиста
+Документация разработчика
 =============================
 
 ***********
@@ -18,4 +18,12 @@
 View-функции
 ************
 .. automodule:: main.views
+    :members:
+.. automodule:: market.views
+    :members:
+.. automodule:: cart.views
+    :members:
+.. automodule:: orders.views
+    :members:
+.. automodule:: user.views
     :members:

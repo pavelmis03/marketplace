@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     'main',
     'market',
     'user',
+    'docs',
 ]
 
 SITE_ID = 1
@@ -123,7 +124,7 @@ ROOT_URLCONF = 'marketplace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['docs'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

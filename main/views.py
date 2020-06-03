@@ -19,7 +19,6 @@ def get_base_context(request, pagename='UNTITLED'):
     :type request: :class:`django.http.HttpRequest`
     :param pagename: название страницы, по умолчанию его значение 'UNTITLED'
     :return: словарь с предустановленными значениями
-    :rtype: :class:`dict`
     """
     context = {
         'pagename': pagename,
@@ -113,3 +112,6 @@ def time_page(request):
             context['site_safety'] = 3
             context['description'] = str(pr)
     return render(request, 'pages/ya_safety.html', context)
+
+def view_docs(request):
+    return render(request, 'build/html/index.html', {})
