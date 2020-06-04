@@ -208,7 +208,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'shp.ms104.dev.marketplace.bot@gmail.com'
 SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
-EMAIL_HOST_PASSWORD = "promprog"
+EMAIL_HOST_PASSWORD = "spfkhfkeysqqiqjf"
 
 
 # Oscar
