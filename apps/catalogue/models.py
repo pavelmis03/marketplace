@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User  # noqa isort:skip
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.models.fields.slugfield import SlugField
@@ -21,6 +22,12 @@ class Market(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('market-detail', args=(self.slug,))
+
+    def get_product_list(self):
+        return Product.objects.filter(market=self)
 
 
 class MarketManager(models.Model):
