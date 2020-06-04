@@ -212,6 +212,7 @@ EMAIL_HOST_PASSWORD = "promprog"
 
 
 # Oscar
+OSCAR_SHOP_NAME = "Мульти-МАРКЕТ"
 OSCAR_DEFAULT_CURRENCY = "RUB"  # валюта
 
 
