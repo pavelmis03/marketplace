@@ -2,6 +2,7 @@
 
 #### [Документация](https://2019-2020.pages.gitlab.informatics.ru/mytischi/ms104/marketplace/docs/index.html)
 #### [Использованные паттерны](PATTERNS.md)
+#### [Телеграмм-бот](http://t.me/ms104_MarketplaceBot)
 
 ### Цель
 Сделать Marketplace
