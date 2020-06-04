@@ -10,49 +10,9 @@ BAD_SITES = [
 ]
 
 
-def get_base_context(request, pagename='UNTITLED'):
-    """
-    Получение базового контекста
-
-    :param request: объект c деталями запроса. Используется для получения авторизованного пользователя
-    :type request: :class:`django.http.HttpRequest`
-    :param pagename: название страницы, по умолчанию его значение 'UNTITLED'
-    :return: словарь с предустановленными значениями
-    """
-    raise NotImplementedError(
-        "Получение меню перенесено в конекстный процессов"
-        "`main.context_processors.navbar`. Эта функция на удаление."
-    )
-#     TODO: Удалить
-#     context = {
-#         'pagename': pagename,
-#         'navbar': [
-#             {'url_name': 'index', 'name': 'Главная'},
-#             {'url': '/oscar/', 'name': 'OSCAR'},
-#         ],
-#         'right_navbar': [],
-#     }
-#
-#     if not request.user.is_authenticated:
-#         context['right_navbar'] += [
-#             {'url_name': 'user.login', 'name': 'Войти'},
-#         ]
-#     else:
-#         context['navbar'] += [
-#             {'url_name': 'index', 'name': 'Для авторизированных'},
-#             {'url_name': 'index', 'name': 'Ещё что-то'},
-#         ]
-#         context['right_navbar'] += [
-#             {'url_name': 'index', 'name': 'Профиль: {}'.format(request.user)},
-#             {'url_name': 'user.logout', 'name': 'Выйти'},
-#         ]
-#
-#     return context
-
-
 def ya_maps_page(request):
     """
-    Страница Яндекс-Карты
+    Страница Яндекс-Карт
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`

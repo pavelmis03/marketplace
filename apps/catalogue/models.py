@@ -7,6 +7,17 @@ from oscar.models.fields.slugfield import SlugField
 
 
 class Market(models.Model):
+    """
+    Модель подмагазина.
+
+    `name` — название
+
+    `slug` — уникальное имя
+
+    `description` — описание
+    
+    `owner` — пользователь-владелец
+    """
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, default=1)
     name = models.CharField(_('Name'), max_length=255, db_index=True)
     slug = SlugField(_('Slug'), max_length=255, db_index=True, unique=True)
@@ -28,11 +39,19 @@ class Market(models.Model):
 
 
 class MarketManager(models.Model):
+    """
+    Модель для создания менеджеров подмагазинов.
+    Соединяет модель магазина и модель пользователя.
+    """
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     market = models.ForeignKey(to=Market, on_delete=models.CASCADE)
 
 
 class Product(AbstractProduct):
+    """
+    Переопределённая модель товара для того, чтобы
+    товар мог принадлежать подмагазину.
+    """
     market = models.ForeignKey(to=Market, on_delete=models.CASCADE,
                                null=True, blank=True)
 
