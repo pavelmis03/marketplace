@@ -19,8 +19,8 @@ def market_detail_view(request, slug):
 
 
 # Переопределение CatalogueView, чтобы добавить список магазинов в контекст.
-class CatalogueView(OscarCatalogueView):
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['markets'] = Market.objects.all()
-        return ctx
+# class CatalogueView(OscarCatalogueView):
+#     def get_context_data(self, **kwargs):
+#         ctx = super().get_context_data(**kwargs)
+#         ctx['markets'] = Market.objects.all()
+#         return ctx

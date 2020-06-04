@@ -137,6 +137,7 @@ TEMPLATES = [
                 'oscar.core.context_processors.metadata',
 
                 'main.context_processors.navbar',
+                'main.context_processors.market_list',
             ],
         },
     },
