@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from oscar.apps.catalogue.views import CatalogueView as OscarCatalogueView
 
-from apps.catalogue.models import Market
+from apps.catalogue.models import Market, Product
 
 
 def market_detail_view(request, slug):
@@ -13,6 +13,7 @@ def market_detail_view(request, slug):
     if markets:
         context['found'] = True
         context['market'] = markets[0]
+        context['products'] = Product.objects.filter(market=markets[0])
 
     return render(request, 'market.html', context)
 
