@@ -13,7 +13,7 @@
                 <li>
 
                     <a  class="uk-button uk-button-default" href="#modal-bask"  uk-toggle>
-                        <img src="/static/img/cart.png" style="height: 45px" style="vertical-align: bottom" alt="">
+                        <img src="{% static '/img/cart.png' %}" style="height: 45px" style="vertical-align: bottom" alt="">
                         <span class="uk-badge" style="margin-top: -60%">{{ request.basket.all_lines|length}} </span>
                     </a>
                 </li>

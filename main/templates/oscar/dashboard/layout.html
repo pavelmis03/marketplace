@@ -7,18 +7,18 @@
 
 {% block styles %}
 {% if use_less %}
-<link rel="stylesheet/less" type="text/css" href="{% static " oscar/less/dashboard.less" %}" />
+<link rel="stylesheet/less" type="text/css" href="{% static 'oscar/less/dashboard.less' %}" />
 {% else %}
-<link rel="stylesheet" type="text/css" href="{% static " oscar/css/dashboard.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'oscar/css/dashboard.css' %}" />
 {% endif %}
 {% endblock %}
 
 {% block extrastyles %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static " oscar/js/select2/select2.min.css" %}" />
-<link rel="stylesheet" href="{% static " oscar/css/select2-bootstrap.min.css" %}" />
-<link rel="stylesheet" href="{% static " oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" %}" />
-<link rel="stylesheet" href="{% static " oscar/css/datetimepicker.css" %}" />
+<link rel="stylesheet" href="{% static 'oscar/js/select2/select2.min.css' %}" />
+<link rel="stylesheet" href="{% static 'oscar/css/select2-bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css' %}" />
+<link rel="stylesheet" href="{% static 'oscar/css/datetimepicker.css' %}" />
 {% endblock %}
 
 {% block title %}
@@ -93,9 +93,9 @@
         </div>
         {% endblock %}
         <div class="page-content">
-            {% block content %}
+            {% block content_ %}
             {% block dashboard_content %}{% endblock dashboard_content %}
-            {% endblock content %}
+            {% endblock %}
         </div>
     </div>
 </div><!-- /container -->
@@ -113,25 +113,25 @@
 {# Local scripts #}
 {% block scripts %}
 <!-- Twitter Bootstrap -->
-<script src="{% static " oscar/js/bootstrap3/bootstrap.min.js" %}"></script>
+<script src="{% static 'oscar/js/bootstrap3/bootstrap.min.js' %}"></script>
     <!-- Oscar -->
-    <script src="{% static "oscar/js/oscar/ui.js" %}"></script>
+    <script src="{% static 'oscar/js/oscar/ui.js' %}"></script>
 {% endblock %}
 
 {% block extrascripts %}
 {{ block.super }}
 
 {# jQuery plugins #}
-<script src="{% static " oscar/js/mousewheel/jquery.mousewheel.js" %}"></script>
-    <script src="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" %}"></script>
-<script src="{% static " oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js" %}"></script>
-    <script src="{% static "oscar/js/inputmask/jquery.inputmask.bundle.js" %}"></script>
-<script src="{% static " oscar/js/select2/select2.min.js" %}"></script>
-    <script src="{% static "oscar/js/jquery-sortable/jquery-sortable-min.js" %}"></script>
-<script src="{% static " oscar/js/oscar/dashboard.js" %}"></script>
-    <script src="{% static "oscar/js/oscar/RelatedObjectLookups.js" %}"></script>
-<script src="{% static " oscar/js/tinymce/tinymce.min.js" %}"></script>
-    <script src="{% static "oscar/js/tinymce/jquery.tinymce.min.js" %}"></script>
+<script src="{% static 'oscar/js/mousewheel/jquery.mousewheel.js' %}"></script>
+    <script src="{% static 'oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js' %}"></script>
+    <script src="{% static 'oscar/js/inputmask/jquery.inputmask.bundle.js' %}"></script>
+<script src="{% static 'oscar/js/select2/select2.min.js' %}"></script>
+    <script src="{% static 'oscar/js/jquery-sortable/jquery-sortable-min.js' %}"></script>
+<script src="{% static 'oscar/js/oscar/dashboard.js' %}"></script>
+    <script src="{% static 'oscar/js/oscar/RelatedObjectLookups.js' %}"></script>
+<script src="{% static 'oscar/js/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'oscar/js/tinymce/jquery.tinymce.min.js' %}"></script>
 {% endblock %}
 
 {% block onbodyload %}
