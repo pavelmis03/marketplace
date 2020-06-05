@@ -24,7 +24,7 @@ class Market(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('market-detail', args=(self.slug,))
+        return f"/market/{self.slug}"
 
     def get_product_list(self):
         return Product.objects.filter(market=self)
