@@ -1,3 +1,4 @@
+"""Views for 'main' app"""
 import requests
 from django.shortcuts import render
 

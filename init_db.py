@@ -63,6 +63,7 @@ def create_superuser_token(user):
 
 
 def main():
+    """Main func"""
     init_django()
     u = create_superuser(**DEFAULT_USER)
     create_superuser_token(u)

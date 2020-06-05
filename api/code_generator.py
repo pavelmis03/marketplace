@@ -1,3 +1,5 @@
+"""Просто модуль для генерации кода"""
+
 CLASS_NAME = "Partner"
 
 SERIALIZER_TEMPLATE = """

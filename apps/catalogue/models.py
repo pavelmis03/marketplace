@@ -1,3 +1,4 @@
+"""Models for 'catalogue' app"""
 from django.contrib.auth.models import User  # noqa isort:skip
 from django.db import models
 from django.urls import reverse

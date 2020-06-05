@@ -1,3 +1,4 @@
+"""Views for 'catalogue' app"""
 from django.shortcuts import render
 from oscar.apps.catalogue.views import CatalogueView as OscarCatalogueView
 

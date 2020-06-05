@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User
-from django.test import TestCase, Client
-from rest_framework.authtoken.models import Token
+"""Test cases for 'API' app"""
+# from django.contrib.auth.models import User
+# from django.test import TestCase, Client
+# from rest_framework.authtoken.models import Token
 
 
 # class APITest(TestCase):

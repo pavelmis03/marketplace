@@ -1,3 +1,4 @@
+"""Test cases for 'main' app"""
 # pylint: disable=missing-function-docstring,invalid-name
 from django.test import TestCase, Client
 from django.contrib.auth.models import User

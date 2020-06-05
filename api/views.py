@@ -1,3 +1,4 @@
+"""Views for 'API' app"""
 # pylint: disable=too-many-ancestors,missing-class-docstring
 from django.contrib.auth.models import User, Group
 from django.contrib.sites.models import Site

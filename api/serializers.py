@@ -1,3 +1,4 @@
+"""Serializers for 'API' app"""
 # pylint: disable=missing-class-docstring
 from django.contrib.auth.models import User, Group
 from django.contrib.sites.models import Site
