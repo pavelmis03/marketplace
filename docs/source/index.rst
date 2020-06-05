@@ -3,12 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. image:: images/logo.png
+   :align: right
+
 Добро пожаловать в документацию проекта «Marketplace»!
 ======================================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Содержание:
 
    user_docs.rst
    code.rst
