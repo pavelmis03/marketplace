@@ -51,7 +51,7 @@
 </header>
 
 <main role="main" class="container mt-3">
-
+    {% if request.get_full_path == "/catalogue/" %}
     <div style="height: 600px; text-align: center;">
         <h2>О нас</h2>
         <p>
@@ -66,10 +66,12 @@
                 {% for market in markets %}
                 <li class="uk-width-3-4" style="margin-left: -400px;">
                     <div class="uk-panel">
-                        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-                            <h3 class="uk-card-title">{{ market }}</h3>
-                            <p>{{ market.description }}</p>
-                        </div>
+                        <a href="{{ market.get_absolute_url }}">
+                            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+                                <h3 class="uk-card-title">{{ market }}</h3>
+                                <p>{{ market.description }}</p>
+                            </div>
+                        </a>
                     </div>
                 </li>
                 {% endfor %}
@@ -82,8 +84,11 @@
 
         </div>
     </div>
+    {% endif %}
     {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
-
+    {% if request.get_full_path == "/ya/safety/" %}
+        {% block content %}{% endblock %}
+    {% endif %}
 </main>
 
 <footer class="footer">
