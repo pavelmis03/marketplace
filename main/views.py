@@ -56,18 +56,18 @@ def ya_safetly_page(request):
                 "threatEntries": [{'url': inp}]
             }
         }
-        pr = requests.post(
+        response = requests.post(
             url='https://sba.yandex.net/v4/threatMatches:find?key=' + key,
             json=data)
-        print(pr, pr.text, 1)
+        print(response, response.text, 1)
         try:
-            json = pr.json()
+            json = response.json()
             if json == {}:  # The site is secure
                 context['site_safety'] = 1
             else:  # The site is NOT secure
                 context['site_safety'] = 2
                 context['description'] = str(json['matches'][0]['threatType'])
-        except Exception:
+        except Exception:  # pylint: disable=broad-except
             context['site_safety'] = 3
-            context['description'] = str(pr)
+            context['description'] = str(response)
     return render(request, 'pages/ya_safety.html', context)

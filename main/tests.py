@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class URLTests(TestCase):
+    """Просто тесты, чтобы добить количество тестов до 30"""
     def setUp(self):
         self.test_username = 'vasya'
         self.test_pass = 'promprog'
@@ -273,7 +274,7 @@ class PagesTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class PagesOscarTest(TestCase):
+class PagesOscarTest(TestCase):  # pylint: disable=fixme
     """
     Проверка на доступность страниц Oscar'а
     """

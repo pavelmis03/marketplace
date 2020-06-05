@@ -24,7 +24,7 @@ def navbar(request: HttpRequest):
         'user_navbar': [],
     }
 
-    if not is_auth:  # TODO: переопределите, если нужно
+    if not is_auth:  # TODO: переопределите, если нужно  # pylint: disable=fixme
         extra_context['user_navbar'] = [
             {'url_name': 'login', 'name': 'Вход'},
             {'url_name': 'index', 'name': 'Регистрация'},
