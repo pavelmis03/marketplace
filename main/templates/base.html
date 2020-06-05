@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'ru-ru' }}" class="{% block html_class %}no-js{% endblock %}">
+
+{% load static %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ pagename }} – Мульти-МАРКЕТ{% endblock %}</title>
+    <!--        Uikit-->
+    <link rel="stylesheet" href="/static/css/uikit-rtl.css">
+    <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
+    <link rel="stylesheet" href="/static/css/uikit.css">
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/uikit-icons.js"></script>
+    <script src="/static/js/uikit-icons.min.js"></script>
+    <!--        -->
+
+    <!--        bootstrap3 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!--        -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="created" content="{% now 'jS M Y h:i' %}"/>
+    <meta name="description" content="{% block description %}{% endblock %}"/>
+    <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}"/>
+    <meta name="robots" content="NOARCHIVE,NOCACHE"/>
+
+    {% block favicon %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+    {% endblock %}
+
+
+    {# Additional CSS - specific to certain pages #}
+    {% block extrastyles %}{% endblock %}
+
+    {# Additional head tags - specific to certain pages #}
+    {% block extrahead %}{% endblock %}
+
+    {# tracking tags. Needed by OSCAR #}
+    {% block tracking %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+
+<header>
+    {% include 'navbar.html' %}
+</header>
+
+<main role="main" class="container mt-3">
+    {% if request.get_full_path == "/catalogue/" %}
+    <div style="height: 600px; text-align: center;">
+        <h2>О нас</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus consequatur cupiditate deserunt dicta doloremque, eius enim eveniet facilis illo nesciunt perferendis porro quaerat suscipit voluptas. A at blanditiis eum ipsa molestias nisi nobis officia omnis, recusandae temporibus! Debitis inventore maxime natus nobis quaerat quidem unde velit voluptatem. Consequuntur culpa debitis deserunt doloribus et exercitationem explicabo illo labore neque nesciunt quam quasi qui quia quidem, ratione rem rerum similique sit ullam voluptate. Beatae fuga fugiat ipsam molestiae quas? Corporis est facilis natus numquam omnis pariatur quibusdam, voluptas! Ad aperiam dicta doloribus eligendi enim est eum fugiat harum molestiae, necessitatibus porro quisquam, reiciendis, sit suscipit tempora totam vero? A, accusamus aperiam architecto aut autem blanditiis corporis dignissimos dolore, eligendi enim error est eveniet facilis hic incidunt libero magni maiores minus molestiae nemo nisi optio, quam quas ratione reiciendis repudiandae sit tenetur. Corporis culpa incidunt itaque nulla! Consequatur facere fuga incidunt nam reiciendis, reprehenderit veritatis voluptatum. A aliquam aspernatur corporis, cupiditate debitis fuga impedit maiores minus pariatur praesentium, quaerat rem sit? Animi beatae ex illo impedit ipsa iusto laudantium maxime minima modi molestiae nam natus nemo odit, officia perspiciatis quasi quia quis recusandae reiciendis repellat sint suscipit ullam ut voluptatem voluptatibus? Debitis deleniti error modi natus pariatur quasi quod reiciendis sapiente, sequi sit tempora temporibus voluptatem. Blanditiis commodi corporis eos expedita fuga ipsa labore laborum laudantium magni maiores minima nobis numquam officia provident quas qui ratione, soluta tempore unde velit veniam voluptate voluptates. Alias cum eos numquam obcaecati odit quod similique, voluptatibus!
+        </p>
+        <br>
+        <h2>Наши лучшие партнеры</h2>
+        <br>
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">
+
+            <ul class="uk-slider-items uk-grid">
+                {% for market in markets %}
+                <li class="uk-width-3-4" style="margin-left: -400px;">
+                    <div class="uk-panel">
+                        <a href="{{ market.get_absolute_url }}">
+                            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+                                <h3 class="uk-card-title">{{ market }}</h3>
+                                <p>{{ market.description }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+               uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+               uk-slider-item="next"></a>
+
+        </div>
+    </div>
+    {% endif %}
+    {% block layout %}{% endblock %} {# content block for OSCAR. Don't use in on other pages! #}
+    {% if request.get_full_path == "/ya/safety/" %}
+        {% block content %}{% endblock %}
+    {% endif %}
+</main>
+
+<footer class="footer">
+    {% block footer %}
+    <div class="container text-right">
+        <span class="text-muted">&copy; подгруппа web группы ms104 promprog ШП 2019-20, {% now "Y" %}</span>
+    </div>
+    {% endblock %}
+</footer>
+
+
+{% block base_js %}
+{% block cdn_scripts %}
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+{% endblock %}
+{% endblock %}
+
+{# Local scripts #}
+{% block scripts %}{% endblock %}
+
+{# Block for body onload functions #}
+<script>
+            $(function() {
+                {% block onbodyload %}{% endblock %}
+            });
+        {% block extra_js %}
+            {# Additional JS scripts (OSCAR only) #}
+        {% endblock %}
+        {% block extrascripts %}{% endblock %}
+        {% block extra_js_navbar %}{% endblock %}
+    </body>
+
+
+</script>
+</body>
+
+</html>

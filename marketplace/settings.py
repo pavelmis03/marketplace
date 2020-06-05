@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'oscar.apps.checkout',
     'oscar.apps.address',
     'oscar.apps.shipping',
-    'oscar.apps.catalogue',
+    # 'oscar.apps.catalogue',
     'oscar.apps.catalogue.reviews',
     'oscar.apps.partner',
     'oscar.apps.basket',
@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.reports',
     'oscar.apps.dashboard.users',
     'oscar.apps.dashboard.orders',
-    'oscar.apps.dashboard.catalogue',
+    # 'oscar.apps.dashboard.catalogue',
     'oscar.apps.dashboard.offers',
     'oscar.apps.dashboard.partners',
     'oscar.apps.dashboard.pages',
@@ -76,6 +76,10 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
 
+    # customized apps
+    'apps.catalogue',
+    'apps.dashboard.catalogue',
+
     # 3rd-party apps that oscar depends on
     'widget_tweaks',
     'haystack',
@@ -83,17 +87,13 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django_tables2',
 
+    'rest_framework',
+    'rest_framework.authtoken',  # https://www.django-rest-framework.org/api-guide/authentication/
+
     'bootstrap4',
-    # 'shop',
-    # 'main',
-    # 'market',
-    # 'user',
-    # 'cart',
-    # 'orders',
 
     'main',
-    'market',
-    'user',
+    'api',
 ]
 
 SITE_ID = 1
@@ -126,7 +126,11 @@ ROOT_URLCONF = 'marketplace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # 'templates',  # MOVED to 'market/templates/'!
+            'main/templates',
+            'market/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,6 +142,9 @@ TEMPLATES = [
                 'oscar.apps.checkout.context_processors.checkout',
                 'oscar.apps.customer.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
+
+                'main.context_processors.navbar',
+                'main.context_processors.market_list',
             ],
         },
     },
@@ -145,17 +152,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ATOMIC_REQUESTS': True,
-    }
-}
 
 if DEBUG:
     DATABASES = {
@@ -195,7 +193,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -208,7 +205,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -223,20 +219,35 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+# LOGIN_URL = '/user/login/'
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+
 # EMAIL - для отправки сообщений со сбросом пароля
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_FILE_PATH = 'emails/email-messages/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'shp.ms104.dev.marketplace.bot@gmail.com'
 SERVER_EMAIL = 'shp.ms104.dev.marketplace.bot@gmail.com'
-EMAIL_HOST_PASSWORD = "promprog"
+EMAIL_HOST_PASSWORD = "spfkhfkeysqqiqjf"
 
 
-# DJANGO-SHOP
-SHOP_DEFAULT_CURRENCY = 'RUB'  # Валюта
-SHOP_MONEY_FORMAT = '{amount} {currency}'  # Формат отображения данных
-DECIMAL_PLACES = 0  # Чтобы было без копеек
+# Oscar
+OSCAR_SHOP_NAME = "Мульти-МАРКЕТ"
+OSCAR_DEFAULT_CURRENCY = "RUB"  # валюта
 
-CART_SESSION_ID = 'cart'
+
+# REST FRAMEWORK - для API
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.DjangoModelPermissions',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}

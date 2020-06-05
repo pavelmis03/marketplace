@@ -1,28 +1,108 @@
-image: python:latest
+image: python:3.7
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
 
 cache:
-    paths:
-        - ~/.cache/pip/
+  paths:
+    - .cache/pip/
+    - venv
 
-before_script:
+
+default:
+  before_script:
     - python -V
-    - apt-get update
-    - apt-get install ssh-client
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+
 
 stages:
-    - deploy
+  - test
+  - style
+  - docs
+  - deploy
+
+
+test:
+  stage: test
+  script:
+    - pip install -r ci/tests_requirements.txt
+    - coverage run --omit='venv/*' manage.py test
+    - coverage report --omit=manage.py,venv
+    - coverage html --omit=manage.py,venv
+    - mkdir public
+    - mv htmlcov public/coverage
+  artifacts:
+    paths:
+      - public/coverage
+
+
+pep8:
+  stage: style
+  script:
+    - pip install -r ci/pycodestyle_requirements.txt
+    - ./ci/pycodestyle_runner.sh
+  artifacts:
+    paths:
+      - public/pycodestyle.txt
+
+
+pylint:
+  stage: style
+  script:
+    - pip install -r ci/pylint_requirements.txt
+    - ./ci/pylint_runner.sh
+  artifacts:
+    paths:
+      - public/pylint.svg
+      - public/pylint.html
+
+
+sphinx:
+  stage: docs
+  script:
+    - pip install -r ci/sphinx_requirements.txt
+    - cd docs
+    - export PYTHONPATH=..
+    - make html
+    - cd ..
+    - mv docs/build/html public/docs
+  only:
+    - develop
+    - master
+  artifacts:
+    paths:
+      - public/docs
+
+
+pages:
+  stage: deploy
+  script:
+    - echo 'Publish pages data'
+  artifacts:
+    paths:
+      - public
+  only:
+    - develop
+    - master
+
 
 upload_to_server:
   stage: deploy
   before_script:
-      - apt-get install -qq git
-      - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-      - eval $(ssh-agent -s)
-      - ssh-add <(echo "$SSH_PRIVATE_KEY")
-      - mkdir -p ~/.ssh
-      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - apt-get update
+    - apt-get install ssh-client
+    - apt-get install -qq git
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-      - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf/ms104_market && git checkout master && git pull origin master && exit"
-      - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf && docker stop ms104_market && docker rm ms104_market && docker-compose build ms104_market && docker-compose up -d ms104_market && exit"
+    - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf/ms104_market && git checkout master && git pull origin master && exit"
+    - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf && docker stop ms104_market && docker rm ms104_market && docker-compose build ms104_market && docker-compose up -d ms104_market && exit"
   only:
-      - master
+    - master

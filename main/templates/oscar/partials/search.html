@@ -1,0 +1,23 @@
+{% load i18n %}
+<div class="uk-navbar-center">
+            <div class="box">
+                <div class="container-4">
+                    <input type="search" id="searcher" placeholder="Найдите, что искали..."/>
+                    <button id="search_but" class="icon"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+</div>
+
+<script>
+    search_but.addEventListener('click', function() {
+        let s = "{% url 'search:search' %}" + "?q=" + searcher.value;
+        location = s;
+    });
+    searcher.addEventListener('keydown', function(e) {
+        if (e.keyCode == 13) {
+            let s = "{% url 'search:search' %}" + "?q=" + searcher.value;
+            location = s;
+         }
+    });
+
+</script>

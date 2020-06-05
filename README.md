@@ -1,11 +1,15 @@
-# Проект "MarketPlace"
+# ![logo](docs/source/images/logo_small.png)  Проект "MarketPlace"
+
+#### [Документация](https://2019-2020.pages.gitlab.informatics.ru/mytischi/ms104/marketplace/docs/index.html)
+#### [Использованные паттерны](PATTERNS.md)
+#### [Телеграмм-бот](http://t.me/ms104_MarketplaceBot)
 
 ### Цель
 Сделать Marketplace
 
 ### Технологический стек:
-- python 3.6+
-- django 3.0+
+- python 3.6+ (<3.8)
+- django 2.0+ (<3.0)
 - sqlite 3.22+
 
 ### Инструкция по настройке проекта:
@@ -32,3 +36,4 @@ Password: promprog
 Password (repeat): promprog
 ```
 9. Создать конфигурацию запуска в PyCharm (файл `manage.py`, опция `runserver`)
+

@@ -1,0 +1,67 @@
+{% load history_tags %}
+{% load basket_tags %}
+{% load currency_filters %}
+{% load image_tags %}
+{% load i18n %}
+{% load staticfiles %}
+{% if request.basket.num_lines %}
+<div class="uk-modal-body">
+
+<ul class="basket-mini-item list-unstyled">
+
+    <table class="uk-table">
+    <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Кол-во</th>
+            <th>Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for line in request.basket.all_lines %}
+        <tr>
+            <td> <div class="image_container">
+                            {% with image=line.product.primary_image %}
+                                {% oscar_thumbnail image.original "100x100" upscale=False as thumb %}
+                                <a href="{{ line.product.get_absolute_url }}">
+                                    <img class="thumbnail" src="{{ thumb.url }}" alt="{{ line.product.get_title }}">
+                                </a>
+                            {% endwith %}
+                        </div></td>
+            <td><p><strong><a href="{{ line.product.get_absolute_url }}">{{ line.description }}</a></strong></p></td>
+            <td> <div class="col-sm-1 align-center">{{ line.quantity }}</div></td>
+            <td>{{ line.unit_price_excl_tax|currency:request.basket.currency }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+            <li class="form-group form-actions">
+            <p class="align-right">
+                {% if request.basket.is_tax_known %}
+                    <small>{% trans "Total:" %}: {{ request.basket.total_incl_tax|currency:request.basket.currency }}</small>
+                {% else %}
+                    <small>{% trans "Total:" %}: {{ request.basket.total_excl_tax|currency:request.basket.currency }}</small>
+                {% endif %}
+            </p>
+
+        </li>
+</ul>
+</div>
+
+<div class="uk-modal-footer uk-text-right">
+    <a href="{% url 'basket:summary' %}" class="uk-button uk-button-default" type="button">{% trans "View basket" %}</a>
+    <a href="{% url 'checkout:index' %}" class="uk-button uk-button-primary" type="button">{% trans "Checkout" %}</a>
+</div>
+
+    {% else %}
+    <div class="uk-modal-body">
+        <ul class="basket-mini-item list-unstyled">
+            <li><p>{% trans "Your basket is empty." %}</p></li>
+        </ul>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+        <button class="uk-button uk-button-primary uk-modal-close" type="button">Закрыть</button>
+    </div>
+    {% endif %}
+
