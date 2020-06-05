@@ -1,14 +1,15 @@
 """Views for 'API' app"""
 # pylint: disable=too-many-ancestors,missing-class-docstring
+from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
+from rest_framework import permissions
+from rest_framework import generics, viewsets
 from oscar.apps.basket.models import Basket, Line as BasketLine
 from oscar.apps.catalogue.models import ProductClass, Category
-from django.contrib.auth.models import User, Group
 from oscar.apps.order.models import Order, Line as OrderLine, ShippingAddress, \
     OrderNote
 from oscar.apps.partner.models import Partner, StockRecord
-from rest_framework import permissions
-from rest_framework import viewsets, generics
+
 
 from apps.catalogue.models import Product, Market
 from api.serializers import UserSerializer, GroupSerializer, \
