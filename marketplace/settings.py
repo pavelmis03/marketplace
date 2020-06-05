@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.reports',
     'oscar.apps.dashboard.users',
     'oscar.apps.dashboard.orders',
-    'oscar.apps.dashboard.catalogue',
+    # 'oscar.apps.dashboard.catalogue',
     'oscar.apps.dashboard.offers',
     'oscar.apps.dashboard.partners',
     'oscar.apps.dashboard.pages',
@@ -73,6 +73,7 @@ INSTALLED_APPS = [
 
     # customized apps
     'apps.catalogue',
+    'apps.dashboard.catalogue',
 
     # 3rd-party apps that oscar depends on
     'widget_tweaks',

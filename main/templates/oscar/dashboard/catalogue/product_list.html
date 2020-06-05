@@ -64,11 +64,7 @@
         {% block product_list %}
             <form method="post">
                 {% csrf_token %}
-                {% for market in markets %}
-                    {% if market.owner == user %}
-                        {% render_table market.get_product_list %}
-                    {% endif %}
-                {% endfor %}
+                {% render_table products %}
             </form>
             <div class="modal fade" id="product-image-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
