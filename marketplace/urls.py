@@ -24,7 +24,7 @@ from marketplace import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # pylint: disable=duplicate-code,fixme
+    # pylint: disable=fixme
     # Oscar # TODO: установить нужный под'url для oscar'овских страниц
     path('', include(apps.get_app_config('oscar').urls[0])),
 

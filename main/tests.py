@@ -1,5 +1,5 @@
 """Test cases for 'main' app"""
-# pylint: disable=missing-function-docstring,invalid-name
+# pylint: disable=missing-function-docstring,invalid-name,fixme
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -274,7 +274,7 @@ class PagesTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class PagesOscarTest(TestCase):  # pylint: disable=fixme
+class PagesOscarTest(TestCase):
     """
     Проверка на доступность страниц Oscar'а
     """
