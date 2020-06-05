@@ -7,6 +7,8 @@
 {% load product_tags %}
 {% load display_tags %}
 {% load i18n %}
+{% load image_tags %}
+
 
 {% block title %}
     {{ market }} | {{ block.super }}
@@ -57,7 +59,7 @@
         {% endblock %}
 
         {% block market_main %}
-        <div class="col-sm-6 market_main">
+        <div class="market_main" style="text-align: center;">
             {% comment %}
             This is a but clunky here.  Better to have some kind of JS-driven dashboard menu that
             pops out when clicked.  A bit like the Django-Debug-Toolbar button
@@ -81,7 +83,7 @@
     {% block market_description %}
         {% if market.description %}
         <div id="market_description" class="sub-header">
-            <h2>Описание магазины</h2>
+            <h2>Описание магазина</h2>
         </div>
         <p>{{ market.description|safe }}</p>
         {% endif %}
@@ -181,6 +183,18 @@
             </ul>
         {% endif %}
     {% endwith %}
+        <h1>Наши товары</h1>
+        <section>
+            <br>
+            <div>
+                <ul class="row">
+                    {% for product in products %}
+                        <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">{% render_product product %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
 
 
 
