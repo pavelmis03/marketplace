@@ -54,16 +54,34 @@
                                     href="{% url 'customer:notifications-inbox' %}">Мой профиль
                             </a>
                             </div>
+
                             {% if user.is_staff or perms.partner.dashboard_access %}
+
                             <div class="uk-button uk-button-secondary uk-margin"
                                  style="background-color: #3058ff; color: white; width: 270px"><a
                                     href="{% url 'dashboard:index' %}">Админка
                             </a>
 
                             </div>
-                            {% endif %}
-                            <div class="uk-button uk-button-secondary"
+                            {% else %}
+                                {% for market in markets %}
+                                    {% if market.owner == user %}
+                                        <div class="uk-button uk-button-secondary uk-margin"
                                  style="background-color: #3058ff; color: white; width: 270px"><a
+                                    href="{% url 'dashboard:index' %}">Админка
+                            </a>
+
+                            </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <a href="/ya/safety" style="margin-top: 15px;">
+                                <div class="uk-button uk-button-secondary"
+                                     style="background-color: #3058ff; color: white; width: 270px">Проверить ссылку на безопасность
+                                </div>
+                            </a>
+                            <div class="uk-button uk-button-secondary"
+                                 style="background-color: #3058ff; color: white; width: 270px; margin-top: 15px;"><a
                                     href="{% url 'customer:logout' %}">Выйти
                             </a>
                             </div>
@@ -100,9 +118,16 @@
                             </form>
                             <!--                                    Конец-->
                             <hr class="">
-                            <a href="#modal-registr" uk-toggle>
+                            <a href="/accounts/login">
                                 <div class="uk-button uk-button-secondary"
                                      style="background-color: #3058ff; color: white; width: 270px">Зарегистрироваться
+                                </div>
+                            </a>
+                            <br>
+                            <br>
+                            <a href="/ya/safety" style="margin-top: 15px;">
+                                <div class="uk-button uk-button-secondary"
+                                     style="background-color: #3058ff; color: white; width: 270px">Проверить ссылку на безопасность
                                 </div>
                             </a>
 

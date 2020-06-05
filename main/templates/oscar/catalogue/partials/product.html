@@ -10,9 +10,9 @@
         {% block product_image %}
             <div class="uk-card-media-top">
                 {% with image=product.primary_image %}
-                    {% oscar_thumbnail image.original "x155" upscale=False as thumb %}
+                    {% oscar_thumbnail image.original "150x250" upscale=False as thumb %}
                     <a href="{{ product.get_absolute_url }}">
-                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}" class="">
+                        <img src="{{ product.primary_image.original.url }}" style="height: 200px; width: 250px;" alt="{{ product.get_title }}" class="">
                     </a>
                 {% endwith %}
             </div>

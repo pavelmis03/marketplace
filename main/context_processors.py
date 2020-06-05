@@ -1,6 +1,8 @@
 """Тут контекстные процессоры, которые добавляют в контекст необходимые вещи"""
 from django.http import HttpRequest
 
+from apps.catalogue.models import Market
+
 
 def navbar(request: HttpRequest):
     """
@@ -39,4 +41,11 @@ def navbar(request: HttpRequest):
                 {'url_name': 'event.list', 'name': 'События'},
                 {'url_name': 'index', 'name': 'Игроки'},
             ]
+    return extra_context
+
+
+def market_list(request: HttpRequest):
+    extra_context = {
+        'markets': Market.objects.all(),
+    }
     return extra_context

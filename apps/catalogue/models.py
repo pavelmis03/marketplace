@@ -38,6 +38,12 @@ class Market(models.Model):
     def get_absolute_url(self):
         return reverse('market-detail', args=(self.slug, ))
 
+    def get_absolute_url(self):
+        return f"/market/{self.slug}"
+
+    def get_product_list(self):
+        return Product.objects.filter(market=self)
+
 
 class MarketManager(models.Model):
     """

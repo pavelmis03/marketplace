@@ -25,10 +25,13 @@
 <div class="content-block">
     <div class="row">
         <aside class="col-md-3 order-graph-details">
-            <label><span><i class="icon-shopping-cart"></i>{{ total_orders_last_day }}</span>{% trans "Total Orders" %}</label>
-            <label><span><i class="icon-hand-right"></i>{{ total_customers_last_day }}</span>{% trans "New Customers" %}</label>
-            <label><span><i class="icon-group"></i>{{ total_customers }}</span>{% trans "Total Customers" %}</label>
-            <label><span><i class="icon-briefcase"></i>{{ total_products }}</span>{% trans "Total Products" %}</label>
+            <label><span><i class="icon-shopping-cart"></i>{% trans "Total Orders" %}:&nbsp;</span>{{ total_orders_last_day }}</label>
+            <br>
+            <label><span><i class="icon-hand-right"></i>{% trans "New Customers" %}:&nbsp;</span>{{ total_customers_last_day }}</label>
+            <br>
+            <label><span><i class="icon-group"></i>{% trans "Total Customers" %}:&nbsp;</span>{{ total_customers }}</label>
+            <br>
+            <label><span><i class="icon-briefcase"></i>{% trans "Total Products" %}:&nbsp;</span>{{ total_products }}</label>
         </aside>
         <div class="col-md-9">
             <div id="order_graph">
