@@ -3,20 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Marketplace's documentation!
-=======================================
+Добро пожаловать в документацию проекта «Marketplace»!
+======================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   overview.rst
+   user_docs.rst
    code.rst
 
 
 
-Indices and tables
-==================
+Индексы и таблицы
+=================
 
 * :ref:`genindex`
 * :ref:`modindex`

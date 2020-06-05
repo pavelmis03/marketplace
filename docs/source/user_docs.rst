@@ -1,5 +1,3 @@
-
-
 Документация пользователя
 =========================
 
@@ -8,12 +6,12 @@
 --------------------
 
 
-.. image:: doc_pictures/regist_or_login.png
+.. image:: images/user/regist_or_login.png
 
 Регистрация
 ~~~~~~~~~~~
 
-.. image:: doc_pictures/regist.png
+.. image:: images/user/regist.png
 1) Введите вашу почту
 2) Введите пароль
 3) Введите тот же пароль, который вы ввели в пункте 2
@@ -22,17 +20,17 @@
 Вход
 ~~~~
 
-.. image:: doc_pictures/login.png
+.. image:: images/user/login.png
 1) Введите вашу электронную почту, которую указывали при регистрации
 2) Введите ваш пароль, который указывали при регистрации
 
 Забыли пароль
 ~~~~~~~~~~~~~
 
-.. image:: doc_pictures/forget_password.png
+.. image:: images/user/forget_password.png
 1) Нажмите на кнопку "Я забыл пароль"
 
-.. image:: doc_pictures/page_forget_password.png
+.. image:: images/user/page_forget_password.png
 
 2) Введите почту, которую указывали при регистрации
 3) Нажмите кнопку "Отправить письмо для смены пароля"
@@ -41,12 +39,12 @@
 Аккаунт
 -------
 
-.. image:: doc_pictures/account.png
+.. image:: images/user/account.png
 
 Профиль
 ~~~~~~~
 
-.. image:: doc_pictures/account_profile.png
+.. image:: images/user/account_profile.png
 
 1) Здесь показано имя и фамилия, которые вы ввели, если вы ничего не вводили тут стоит прочерк
 2) Здесь указана ваша почта
@@ -57,7 +55,7 @@
 Смена пароля
 """"""""""""
 
-.. image:: doc_pictures/change_password.png
+.. image:: images/user/change_password.png
 
 1) Введите ваш предыдущий пароль
 2) Введите ваш новый пароль
@@ -72,7 +70,7 @@
 Редактирование профиля
 """"""""""""""""""""""
 
-.. image:: doc_pictures/edit_profile.png
+.. image:: images/user/edit_profile.png
 
 1) Здесь вы **можете** ввести ваше имя
 2) Здесь вы **можете** ввести вашу фамилию
@@ -91,7 +89,7 @@
 
 Здесь вы можете посмотреть какие заказы вы делали
 
-.. image:: doc_pictures/history.png
+.. image:: images/user/history.png
 
 ~~~~~~~~~~~~~~~
 
@@ -102,13 +100,13 @@
 
 1) Здесь вы можете добавить новый адрес
 
-.. image:: doc_pictures/adress.png
+.. image:: images/user/adress.png
 
 Добавление нового адреса
 """"""""""""""""""""""""
 Введите информацию о вас и о вашем адресе
 
-.. image:: doc_pictures/add_adress.png
+.. image:: images/user/add_adress.png
 
 1) Если вы хотите сохранить адрес, нажмите кнопку "Сохранить"
 2) Если вы не хотитет сохранять адрес, нажмите кнопку "отмена"
@@ -120,19 +118,19 @@
 
 Здесь вы можете посмотреть историю сообщений, которые вы получали и отправляли
 
-.. image:: doc_pictures/history_of_messages.png
+.. image:: images/user/history_of_messages.png
 
 Оповещение о товарах
 ~~~~~~~~~~~~~~~~~~~~
 
 Здесь вы можете посмотреть какие заказанные товары прибыли на склад
 
-.. image:: doc_pictures/products.png
+.. image:: images/user/products.png
 
 Уведомления
 ~~~~~~~~~~~
 
-.. image:: doc_pictures/notifications.png
+.. image:: images/user/notifications.png
 
 
 1) Здесь вы можете посмотреть новые уведомления
@@ -144,7 +142,7 @@
 
 Здесь вы можете посмотреть ваш список желаемого
 
-.. image:: doc_pictures/wish_list.png
+.. image:: images/user/wish_list.png
 
 1) Здесь вы можете создать новый список желаемого
 
