@@ -45,6 +45,7 @@ def navbar(request: HttpRequest):
 
 
 def market_list(request: HttpRequest):
+    """Добавляет список всех подмагазинов"""
     extra_context = {
         'markets': Market.objects.all(),
     }
